@@ -37,3 +37,10 @@ def load_user(user_id):
 app.register_blueprint(inicio)
 app.register_blueprint(admn)
 app.register_blueprint(errors)
+
+with app.app_context():
+    db.create_all()
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
