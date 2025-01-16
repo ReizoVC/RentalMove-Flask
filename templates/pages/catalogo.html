@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block titulo %}Catalogo de Autos{% endblock %}
+
+
+{% block body %}
+
+
+<main class=" main_catalogo">
+    <img src="{{url_for('static', filename='images/catalogo/img_top.avif')}}" alt="" class="img-catalog_top">
+    <h1 class="tittle-catalog_top">NUESTROS AUTOS</h1>
+    <div class="searchbar-catalog">
+        <button class="searchbar-catalog_button" ></button>
+    </div>
+    <div class="filters-catalog">
+        <p>Marca</p>
+        <p>Año</p>
+        <p>Color</p>
+        <p>Tipo</p>
+        <p>Local</p>
+    </div>
+    <div class="cards-container-catalgo">
+        {% for auto in autos %}
+    <div class="card-catalogo">
+        <img class="card_img-catalogo" src="{{ url_for('static', filename=auto.imagen.replace('static/', '').replace('\\', '/')) }}" alt="{{ auto.modelo }}">
+        <div class="card_info-catalogo">
+            <div class="card_info-catalogo_top">
+                <img src="{{ url_for('static', filename='images/logosMarca/' ~ auto.marca ~ 'Logo.webp') }}" alt="{{ auto.marca }}" class="card_marca-logo_catalogo">
+                <div>
+                    <h2>{{ auto.marca }} {{ auto.modelo }}</h2>
+                    <p>{{ auto.año }} <span>• {{ auto.placa }}</span></p>
+                </div>
+            </div>
+            <div class="card_info-catalogo_bottom">
+                <a href="{{ url_for('inicio.alquilar_auto', auto_id=auto.id) }}" class="btn-alquilar_card-catalogo">Alquilar</a>
+                <h2>${{ auto.precio_dia }}<span class="spanDia-catalogo">/dia</span></h2>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+</main>
+
+{% endblock %}

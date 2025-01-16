@@ -1,0 +1,66 @@
+{% extends "ad_layout.html" %}
+
+{% block titulo %}Admin Personal{% endblock %}
+
+{% block body %}
+    <main>
+        <dialog id="newEmployeeDialog">
+            <div class="dialog-main-cont">
+                <button class="close-btn" id="close-newEmployee">&times;</button>   
+                <form action="{{ url_for('admn.nuevo_personal') }}" method="POST">
+                    <div class="admin-dialog-header">
+                        <h2>|<span>NUEVO EMPLEADO</span></h2> 
+                        <button type="submit">AGREGAR</button>
+                    </div>
+                    <input type="text" name="nombre" id="nombre" placeholder="Nombre" required>
+                    <input type="text" name="apellido" id="apellido" placeholder="Apellido" required>
+                    <input type="email" name="correo" id="correo" placeholder="Email" required>
+                    <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required>
+                    <div class="cont-bottom">
+                        <input type="text" name="nroDni" id="nroDni" placeholder="Nro. DNI" required>
+                        <select name="rol" id="rol" required>
+                            <option value="usuario">Usuario</option>
+                            <option value="admin">Administrador</option>
+                        </select>
+                    </div>
+                </form>
+            </div>                     
+            
+        </dialog>        
+        <div class="header-ad_empleado">
+            <h1>Lista de Empleados</h1>
+            <button id="AdminAddNewEmployee">NUEVO EMPLEADO</button>
+        </div>
+        <table>
+            <thead>
+                <tr class="admin-table-header admin-table-header-personal">
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Contraseña</th>
+                    <th>Nro. DNI</th>
+                    <th>Permisos</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="admin-table-row admin-table-row-personal">
+                {% for personal in personal_list %}
+                <tr >
+                    <td>{{ personal.nombre }}</td>
+                    <td>{{ personal.apellido }}</td>
+                    <td>{{ personal.correo }}</td>
+                    <td>{{ personal.contrasena }}</td>
+                    <td>{{ personal.nroDni }}</td>
+                    <td>Si</td>
+                    <td>
+                        <button class="edit-employee-btn" data-id="{{ personal.id }}" data-nombre="{{ personal.nombre }}" data-apellido="{{ personal.apellido }}" data-correo="{{ personal.correo }}" data-contrasena="{{ personal.contrasena }}" data-nroDni="{{ personal.nroDni }}" data-rol="{{ personal.rol }}"><img src="{{ url_for('static', filename='svg/admin_icons/editar.svg') }}" alt="Editar"></button>
+                        <form action="{{ url_for('admn.eliminar_personal', personal_id=personal.id) }}" method="POST" class="delete-employee-form" style="display:inline;">
+                            <button type="submit" class="delete-employee-btn"><img src="{{ url_for('static', filename='svg/admin_icons/eliminar.svg') }}" alt="Eliminar"></button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+{% endblock %}

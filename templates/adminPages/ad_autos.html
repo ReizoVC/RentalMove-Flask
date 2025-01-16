@@ -1,0 +1,73 @@
+{% extends "ad_layout.html" %}
+
+{% block titulo %}Admin Autos{% endblock %}
+
+{% block body %}
+    <main>
+        <dialog id="newAutoDialog">
+            <div class="dialog-main-cont">
+                <button class="close-btn" id="close-newAuto">&times;</button>   
+                <form id="autoForm" action="{{ url_for('admn.nuevo_auto') }}" method="POST" enctype="multipart/form-data">
+                    <div class="admin-dialog-header">
+                        <h2>|<span id="modalTitle">NUEVO AUTO</span></h2> 
+                        <button type="submit" id="submitButton">AGREGAR</button>
+                    </div>
+                    <input type="hidden" name="id" id="autoId">
+                    <div class="file-select">
+                        <input type="file" name="imagen" id="inp-imagen" aria-label="Archivo">
+                    </div>
+                    <input type="text" name="marca" id="marca" placeholder="Marca" required>
+                    <input type="text" name="modelo" id="modelo" placeholder="Modelo" required>
+                    <input type="text" name="placa" id="placa" placeholder="Placa" required>
+                    <input type="number" name="año" id="año" placeholder="Año" required>
+                    <div class="cont-bottom">
+                        <input type="number" step="0.01" name="precio_dia" id="precioDia" placeholder="Precio/Dia" required>
+                        <select name="disponibilidad" id="disponibilidad" required>                            
+                            <option value="">Disponibilidad</option>
+                            <option value="true">Si</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+                </form>
+            </div>                     
+            
+        </dialog>        
+        <div class="header-ad_auto">
+            <h1>Lista de Vehiculos</h1>
+            <button id="AdminAddNewAuto">NUEVO AUTO</button>
+        </div>
+        <table>
+            <thead>
+                <tr class="admin-table-header admin-table-header-autos">
+                    <th>Imagen</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Placa</th>
+                    <th>Año</th>
+                    <th>Disponibilidad</th>
+                    <th>Precio/Dia</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="admin-table-row">
+                {% for auto in autos %}
+                <tr >
+                    <td><img src="{{ url_for('static', filename=auto.imagen.replace('static/', '').replace('\\', '/')) }}" alt="Imagen del auto" class="admin-form-img"></td>
+                    <td>{{ auto.marca }}</td>
+                    <td>{{ auto.modelo }}</td>
+                    <td>{{ auto.placa }}</td>
+                    <td>{{ auto.año }}</td>
+                    <td>{{ auto.disponibilidad }}</td>
+                    <td>{{ auto.precio_dia }}</td>
+                    <td>
+                        <button class="edit-auto-btn" data-id="{{ auto.id }}" data-imagen="{{ auto.imagen }}" data-marca="{{ auto.marca }}" data-modelo="{{ auto.modelo }}" data-placa="{{ auto.placa }}" data-año="{{ auto.año }}" data-precio_dia="{{ auto.precio_dia }}" data-disponibilidad="{{ auto.disponibilidad }}"><img src="{{ url_for('static', filename='svg/admin_icons/editar.svg') }}" alt="Editar"></button>
+                        <form action="{{ url_for('admn.eliminar_auto', auto_id=auto.id) }}" method="POST" class="delete-auto-form" style="display:inline;">
+                            <button type="submit" class="delete-auto-btn"><img src="{{ url_for('static', filename='svg/admin_icons/eliminar.svg') }}" alt="Eliminar"></button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+{% endblock %}

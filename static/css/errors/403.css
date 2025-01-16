@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:700");
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  background-color: #111111;
+  font-family: "Roboto Condensed";
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+.police-tape {
+    background-color: #7D4CFF;
+  background: linear-gradient(180deg, rgb(199.0782122905, 178, 255) 0%, #7D4CFF 5%, #7D4CFF 90%, rgb(143.5195530726, 101.5, 255) 95%, rgb(20.8044692737, 0, 76) 100%);
+  padding: 0.125em;
+  font-size: 3em;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.police-tape--1 {
+  transform: rotate(10deg);
+  position: absolute;
+  top: 40%;
+  left: -5%;
+  right: -5%;
+  z-index: 2;
+  margin-top: 0;
+}
+
+.police-tape--2 {
+  transform: rotate(-8deg);
+  position: absolute;
+  top: 50%;
+  left: -5%;
+  right: -5%;
+}
+
+.ghost {
+  display: flex;
+  justify-content: stretch;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.ghost--columns {
+  display: flex;
+  flex-grow: 1;
+  flex-basis: 200px;
+  align-content: stretch;
+}
+
+.ghost--navbar {
+  flex: 0 0 60px;
+  background: linear-gradient(0deg, #27292d 0px, #27292d 10px, transparent 10px);
+  border-bottom: 2px solid #111111;
+}
+
+.ghost--column {
+  flex: 1 0 30%;
+  border-width: 0px;
+  border-style: solid;
+  border-color: #27292d;
+  border-left-width: 10px;
+  background-color: rgb(24.7928571429, 26.0642857143, 28.6071428571);
+}
+.ghost--column:nth-child(1) .code:nth-child(1) {
+  margin-left: 3.5em;
+}
+.ghost--column:nth-child(1) .code:nth-child(2) {
+  margin-left: 5em;
+}
+.ghost--column:nth-child(1) .code:nth-child(3) {
+  margin-left: 5em;
+}
+.ghost--column:nth-child(1) .code:nth-child(4) {
+  margin-left: 2.5em;
+}
+.ghost--column:nth-child(2) .code:nth-child(1) {
+  margin-left: 5em;
+}
+.ghost--column:nth-child(2) .code:nth-child(2) {
+  margin-left: 4.5em;
+}
+.ghost--column:nth-child(2) .code:nth-child(3) {
+  margin-left: 2.5em;
+}
+.ghost--column:nth-child(2) .code:nth-child(4) {
+  margin-left: 1.5em;
+}
+.ghost--column:nth-child(3) .code:nth-child(1) {
+  margin-left: 3em;
+}
+.ghost--column:nth-child(3) .code:nth-child(2) {
+  margin-left: 2.5em;
+}
+.ghost--column:nth-child(3) .code:nth-child(3) {
+  margin-left: 5.5em;
+}
+.ghost--column:nth-child(3) .code:nth-child(4) {
+  margin-left: 4em;
+}
+
+.ghost--main {
+  background-color: #111111;
+  border-top: 15px solid rgb(48.4714285714, 50.9571428571, 55.9285714286);
+  flex: 1 0 100px;
+}
+
+.code {
+  display: block;
+  width: 100px;
+  background-color: #27292d;
+  height: 1em;
+  margin: 1em;
+}
+
+.ghost--main .code {
+  height: 2em;
+  width: 200px;
+}
+
+/*# sourceMappingURL=styles.css.map */

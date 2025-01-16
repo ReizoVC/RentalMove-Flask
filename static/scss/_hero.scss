@@ -1,0 +1,57 @@
+main{
+    width: 75vw;
+    margin: 0 auto;
+}
+
+.hero{
+    background-image: url(../images/index/image9.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    aspect-ratio: 21/9;
+    font-family: "League Spartan", serif;
+    margin-top: 100px;
+    border-radius: 24px;
+
+    display: flex;    
+    justify-content: flex-end;
+    flex-direction: column;
+
+    padding-left: 40px;
+    padding-bottom: 6%;
+}
+
+.marcasSlider{
+    display: grid;
+    height: 15vh;
+    grid-template-columns: repeat(7, 1fr);
+    justify-items: center;
+    align-content: center;
+
+}
+
+.logosSlider{
+    height: 80px;
+}
+.logosSlider4{
+    height: 70px;
+    margin: auto 20px;
+}
+
+.gris{
+    filter: opacity(40%);
+    z-index: -10;
+}
+
+.motd-hero{
+    font-weight: 700;
+    color: #fff;
+    font-size: 5rem;
+}
+
+.searchBar{
+    width: 70%;
+    height: 15%;
+    background-color: #fff;
+    border-radius: 20px;
+}

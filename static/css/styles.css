@@ -1,0 +1,812 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #252525;
+}
+
+.logo {
+  height: 60px;
+  border-radius: 50%;
+}
+
+header {
+  background-color: rgba(175, 175, 175, 0.4);
+  backdrop-filter: blur(5px);
+  width: 100%;
+  position: fixed;
+  padding: 5px;
+  top: 0;
+  font-family: "League Spartan", serif;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70vw;
+  margin: 0 auto;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  width: 25%;
+}
+
+.opt {
+  font-size: 1.2em;
+  font-weight: 600;
+  --clippy: polygon(50% 0, 50% 0, 50% 100%, 50% 100%);
+}
+.opt::after{
+  content: "";
+  display: block;
+  background: #252525;
+  width: 100%;
+  margin-top: 3px;
+  height: 3px;
+  clip-path: var(--clippy);
+  transition: clip-path .5s;
+  border-radius: 4px;
+}
+.opt:hover{
+  --clippy: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.account {
+  display: flex;
+  color: #E4D3FD;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.2em;
+  background-color: #100E2E;
+  padding: 10px 30px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.account:hover {
+  color: #8571A9;
+}
+
+main {
+  width: 75vw;
+  margin: 0 auto;
+}
+
+.hero {
+  background-image: url(../images/index/image9.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  aspect-ratio: 21/9;
+  font-family: "League Spartan", serif;
+  margin-top: 100px;
+  border-radius: 24px;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  padding-left: 40px;
+  padding-bottom: 6%;
+}
+
+.marcasSlider {
+  display: grid;
+  height: 15vh;
+  grid-template-columns: repeat(7, 1fr);
+  justify-items: center;
+  align-content: center;
+}
+
+.logosSlider {
+  height: 80px;
+}
+
+.logosSlider4 {
+  height: 70px;
+  margin: auto 20px;
+}
+
+.gris {
+  filter: opacity(40%);
+  z-index: -10;
+}
+
+.motd-hero {
+  font-weight: 700;
+  color: #fff;
+  font-size: 5rem;
+}
+
+.searchBar {
+  width: 70%;
+  height: 15%;
+  background-color: #fff;
+  border-radius: 20px;
+}
+
+.mainCardsCont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  margin: 0;
+  font-family: "League Spartan", serif;
+}
+
+.featuredSection {
+  width: 100%;
+}
+
+.cardsField {
+  margin: 50px 0;
+}
+
+.firstField {
+  margin-top: 0;
+}
+
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  justify-items: center;
+  gap: 20px;
+}
+
+.card {
+  width: 300px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-content h2 {
+  margin: 0;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.card-content p {
+  margin: 5px 0;
+  color: #777;
+}
+
+.card-content .brand {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.card-content .brand img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.card-content .price {
+  font-size: 1.2em;
+  color: #333;
+}
+
+.card-content .price span {
+  font-size: 0.8em;
+  color: #777;
+}
+
+.card-content .rent-button {
+  display: block;
+  width: 50%;
+  padding: 10px;
+  background-color: #6200ea;
+  color: white;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.cardLogo {
+  object-fit: scale-down !important;
+}
+
+.rent-button:hover {
+  background-color: #3700b3;
+}
+
+.pagination span {
+  margin: 0 10px;
+  font-size: 1.2em;
+  color: #777;
+}
+
+.prev-arrow,
+.next-arrow {
+  background: none;
+  border: none;
+  font-size: 2em;
+  cursor: pointer;
+  color: #777;
+}
+
+.topPagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 98%;
+  margin: 10px auto;
+  padding-right: 2%;
+}
+
+.cardBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer {
+  background-color: #100E2E;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-family: "Lexend Exa", serif;
+  font-size: 14px;
+}
+
+.footer-icons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.footer-icons a {
+  margin: 0 10px;
+}
+
+.footer-icons img {
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.footer-logo {
+  margin-bottom: 10px;
+}
+
+.footer-logo img {
+  width: 50px;
+  height: auto;
+}
+
+.footer-text p {
+  margin: 5px 0;
+}
+
+.footer-text a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-text a:hover {
+  text-decoration: underline;
+}
+
+.carLogo {
+  border-radius: 50%;
+}
+
+.copyright {
+  color: #969696;
+}
+
+.footer-text {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.footerCredits {
+  display: flex;
+  justify-self: flex-end;
+  gap: 5px;
+  cursor: default;
+}
+.footerCredits a {
+  color: #7647FE;
+  font-weight: 800;
+}
+
+.footerCredits a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+
+
+/* ############### Form #################### */
+
+.loginDialog{
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  border: none;
+  background-color: rgba(102, 102, 102, 0.5);
+  backdrop-filter: blur(5px);
+  position: fixed;
+  top: 0;
+  font-family: "League Spartan", sans-serif;
+}
+.signinDialog {
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  border: none;
+  background-color: rgba(102, 102, 102, 0.5);
+  backdrop-filter: blur(5px);
+  position: fixed;
+  top: 0;
+  font-family: "League Spartan", sans-serif;
+}
+
+.container {
+  display: flex;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  height: 80%;
+  width: 60%;
+}
+.left-section {
+  padding: 20px;
+  width: 50%;
+}
+
+.formImage{
+  background-image: url('../images/registro/car-image.png');
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.imageBottom{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(0, 0, 0, .7);
+  width: 100%;
+  padding: 10px 0;
+  p{
+      color: #FFF;
+      font-family: "League Spartan";
+      font-size: 1.5em;
+      font-weight: 600;
+      line-height: normal;
+  }
+
+}
+
+.formImage h1 {
+  font-size: 4em;
+  margin: 10%;
+  font-weight: 800;
+  font-family: "League Spartan";
+}
+.login-btn {
+  background-color: #8700E0;
+  color: white;
+  border: none;
+  padding: 2% 8%;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.login-btn:hover {
+  background-color: #6F00C4;
+}
+
+.right-section {
+  padding: 20px;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  ;
+}
+
+.formLogo{
+  height: 70px;
+  border-radius: 50%;
+  position: relative;
+  bottom: 35px;
+}
+
+.right-section h2 {
+  text-align: center;
+  font-size: 2.5em;
+}
+
+
+form label {
+  display: block;
+  color: #333;
+}
+form input {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  border: 1px solid #E2E2E2;
+  border-radius: 13px;
+  height: 50px;
+  background-color: #F0F0F0;
+  font-size: 1.1em;
+  font-weight: 600;
+  padding-left: 15px;
+}
+
+form input:focus {
+  outline: none;
+  background-color: #d9d5ff;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  color: #989898;
+  a{
+      color: #7a7a7a;
+  }
+}
+.checkbox-container input {
+  margin-right: 10px;
+}
+
+.checkbox-container a:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #8700E0;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 13px;
+  cursor: pointer;
+  height: 50px;
+  font-size: 1.4em;
+}
+
+form button:hover {
+  background-color: #6F00C4;
+}
+
+.inputGrup{
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+
+}
+
+#terms{
+  cursor: pointer;
+  background-color: #c5c5c5;
+  width: 28px;
+  height: 28px;
+  appearance: none;
+  border: 1px solid #888;
+}
+
+#terms:checked {
+  background-color: #8700E0;
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+  border: none;
+}
+
+
+#terms:disabled {
+  background-color: #c7c7c7;
+  background-image: none;
+}
+
+#terms:disabled:checked {
+  background-color: #c6c6c6;
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+} 
+
+.fomrMainCont{
+  background-color: #EBEBEB;
+  width: 90%;
+  height: 85%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  padding: 0 20px;
+  form{
+      gap: 20px;
+  }
+}   
+
+.formTitle{
+  text-align: center;
+  margin-bottom: 20px;
+  p{
+      color: #787878;
+  }
+}
+
+.right-section {
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.right-section {
+  position: relative;
+}
+
+.fomrMainContlogin{
+  height: 70%;
+}
+
+.loginInput{
+  margin: 20px 0;
+}
+
+.loged-state {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: #737373;
+  font-weight: 600;
+  font-size: 1.2em;
+}
+.loged-state span {
+  color: #7D4CFF;
+  margin-right: 10px;
+}
+.loged-state .dropbtn {
+  background-color: #7D4CFF;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  display: flex;
+}
+.loged-state .dropbtn:hover {
+  background-color: #5C2D9E;
+}
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+
+.dropdown-content a:hover {
+  color: #6b6b6b;
+}
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0 5px 5px 5px;
+}
+
+.logout-button{
+  color: #D9D9D9;
+  margin: 6px 8px;
+  padding: 6px 8px;
+  cursor: pointer;
+  background-color: #6200ea;
+  border: none;
+  border-radius: 5px;
+  font-size: .8em;
+  font-weight: 600;
+}
+
+.logout-button:hover{
+  background-color: #3700b3;
+}
+
+
+/* catalogo */
+
+
+.main_catalogo {
+  width: 100%;
+  font-family: "Lexend Exa", sans-serif;
+}
+
+
+.img-catalog_top{
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  height: 300px;
+}
+
+.tittle-catalog_top{
+  text-align: center;
+  font-size: 3em;
+  padding-top: 100px;
+}
+
+.searchbar-catalog{
+  width: 50vw;
+  height: 70px;
+  background-color: #D9D9D9;
+  border-radius: 10px;
+  margin: 100px auto;
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.searchbar-catalog_button{
+  aspect-ratio: 1/1;
+  height: 70px;
+  border-radius: 10px;
+  border: none;
+  background-color: #7D4DFF;
+  cursor: pointer;
+}
+
+.filters-catalog{
+  width: 40vw;
+  margin: 100px auto;
+  display: flex;
+  justify-content: space-around;
+  font-family: "League Spartan";
+  font-size: 1.5em;
+  font-weight: 600;
+  color: #666666;
+}
+
+.filters-catalog p{
+  padding: 20px 40px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.filters-catalog p:hover{
+  background-color: #252525;
+  color: #7D4CFF;
+}
+
+.cards-container-catalgo{
+  width: 70vw;
+  padding: 10px;
+  margin: 0 auto;
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  justify-items: center;
+}
+
+.card-catalogo{
+  aspect-ratio: 1/1;
+  width: 100%;
+  max-width: 400px;
+  background-color: #ebebeb;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 4px 4px 4.3px 0px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.card_img-catalogo{
+  height: 70%;
+  max-width: 100%;
+  object-fit: cover; 
+  object-position: center;
+  border-radius: inherit;
+}
+
+.card_info-catalogo_top{
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin: 10px;
+  p{
+      color: #939393;
+  }
+}
+
+.card_marca-logo_catalogo{
+  max-width: 10%;
+  border-radius: 50%;
+}
+
+.card_info-catalogo{
+  font-family: "League Spartan";
+  display: flex;
+  flex-direction: column;
+}
+
+.card_info-catalogo_bottom{
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h2{
+      font-size: 1.8em;
+  }
+}
+
+.spanDia-catalogo{
+  font-size: .6em !important;
+  color: #939393;
+}
+
+.btn-alquilar_card-catalogo{
+  padding: 10px 40px;
+  border-radius: 5px;
+  border: none;
+  background-color: #7D4DFF;
+  color: #fff;
+  font-family: "Lexend Exa", sans-serif;
+  cursor: pointer;
+}
+
+.btn-alquilar_card-catalogo:hover{
+  background-color: #5d38c2;
+}

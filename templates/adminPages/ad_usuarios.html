@@ -1,0 +1,75 @@
+<!-- filepath: /c:/Users/reizo/Desktop/Flask_Prueba/templates/adminPages/ad_usuarios.html -->
+{% extends "ad_layout.html" %}
+
+{% block titulo %}Admin Usuarios{% endblock %}
+
+{% block body %}
+    <main>
+        <dialog id="newUserDialog">
+            <div class="dialog-main-cont">
+                <button class="close-btn" id="close-newUser">&times;</button>   
+                <form id="userForm" action="{{ url_for('admn.nuevo_usuario') }}" method="POST">
+                    <div class="admin-dialog-header">
+                        <h2>|<span id="modalTitle">NUEVO USUARIO</span></h2> 
+                        <button type="submit" id="submitButton">AGREGAR</button>
+                    </div>
+                    <input type="hidden" name="id" id="userId">
+                    <input type="text" name="nombre" id="nombre" placeholder="Nombre" required>
+                    <input type="text" name="apellido" id="apellido" placeholder="Apellido" required>
+                    <input type="email" name="correo" id="correo" placeholder="Email" required>
+                    <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required>
+                    <input type="text" name="nroLicencia" id="nroLicencia" placeholder="Nro. Licencia" required>
+                    <div class="cont-bottom">
+                        <input type="text" name="nroDni" id="nroDni" placeholder="Nro. DNI" required>
+                        <select name="rol" id="rol" required>
+                            <option value="usuario">Usuario</option>
+                            <option value="admin">Administrador</option>
+                        </select>
+                    </div>
+                </form>
+            </div>                     
+            
+        </dialog>        
+        <div class="header-ad_usuarios">
+            <h1>Lista de Usuarios</h1>
+            <button id="AdminAddNewUser">NUEVO USUARIO</button>
+        </div>
+        <!--  -->
+        <table>
+            <thead>
+                <tr class="admin-table-header">
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Contraseña</th>
+                    <th>Nro. Licencia</th>
+                    <th>Nro. DNI</th>
+                    <th>Permisos</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="admin-table-row">
+                {% for usuario in usuarios %}
+                <tr >
+                    <td>{{ usuario.nombre }}</td>
+                    <td>{{ usuario.apellido }}</td>
+                    <td>{{ usuario.correo }}</td>
+                    <td>{{ usuario.contrasena }}</td>
+                    <td>{{ usuario.nroLicencia}}</td>
+                    <td>{{ usuario.nroDni }}</td>
+                    <td>No</td>
+                    <td>
+                        <button id="edit-user-btn" class="edit-user-btn" data-id="{{ usuario.id }}" data-nombre="{{ usuario.nombre }}" data-apellido="{{ usuario.apellido }}" data-correo="{{ usuario.correo }}" data-contrasena="{{ usuario.contrasena }}" data-nroLicencia="{{ usuario.nroLicencia }}" data-nroDni="{{ usuario.nroDni }}" data-rol="{{ usuario.rol }}"><img src="{{ url_for('static', filename='svg/admin_icons/editar.svg') }}" alt="Editar"></button>
+                        <form action="{{ url_for('admn.eliminar_usuario', usuario_id=usuario.id) }}" method="POST" class="delete-user-form" style="display:inline;">
+                            <button type="submit" class="delete-user-btn"><img src="{{ url_for('static', filename='svg/admin_icons/eliminar.svg') }}" alt="Eliminar"></button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+    
+    </main>
+
+{% endblock %}

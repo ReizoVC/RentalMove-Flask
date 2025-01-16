@@ -1,0 +1,25 @@
+<div class="sidebar">
+    <div class="profile">
+        <img src="{{url_for('static', filename='images/logo.png')}}" alt="Profile Icon">
+        <h2>{{ current_user.nombre }} {{ current_user.apellido }}</h2>
+        <p>SUP. ADMINISTRATIVO</p>
+    </div>
+    <nav class="menu">
+        <ul>
+            <li class="{% if request.path == '/admin' %}active{% endif %}" >
+                <a href="/admin"><img class="icon-home icon" src="{{url_for('static', filename='svg/ad_svg/home.svg')}}" alt="" >Home</a>
+            </li>
+            <li class="{% if request.path == '/admin/vehiculos' %}active{% endif %}" >
+                <a href="/admin/vehiculos"><img class="icon-car icon" src="{{url_for('static', filename='svg/ad_svg/car.svg')}}" alt="" >Vehículos</a>
+            </li>
+            <li class="{% if request.path == '/admin/usuarios' %}active{% endif %}" >
+                <a href="/admin/usuarios"><img class="icon-users icon" src="{{url_for('static', filename='svg/ad_svg/user.svg')}}" alt="" >Usuarios</a>
+            </li>
+            <li class="{% if request.path == '/admin/personal' %}active{% endif %}" >
+                <a href="/admin/personal"><img class="icon-personal icon" src="{{url_for('static', filename='svg/ad_svg/personal.svg')}}" alt="" >Personal</a>
+            </li>
+            <li><a href="/"><img class="icon-inicio icon" src="{{url_for('static', filename='svg/ad_svg/inicio.svg')}}" alt="" >Inicio</a></li>
+        </ul>
+    </nav>
+    <a class="log-out" onclick="window.location.href='/logout'" >Logout<img class="logout-icon icon" src="{{url_for('static', filename='svg/ad_svg/logout.svg')}}" alt="" ></a>
+</div>

@@ -1,0 +1,33 @@
+{% extends "ad_layout.html" %}
+
+{% block titulo %}Admin{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="analytics">
+            <div class="analytics-container"> 
+                <div class="analytics-card" onclick="window.location.href='/admin/vehiculos'" cursor="pointer">
+                    <div class="analytics-card-up">
+                        <img src="{{url_for('static', filename='svg/ad_svg/car.svg')}}" alt="Vehículos" class="analytics-icon">
+                        <h2>Vehículos</h2>
+                    </div>
+                    <p>{{ vehicle_count }}</p>
+                </div>
+                <div class="analytics-card" onclick="window.location.href='/admin/usuarios'" cursor="pointer">
+                    <div class="analytics-card-up">
+                        <img src="{{url_for('static', filename='svg/ad_svg/user.svg')}}" alt="Usuarios" class="analytics-icon">
+                        <h2>Usuarios</h2>
+                    </div>
+                    <p>{{ user_count }}</p>
+                </div>
+                <div class="analytics-card" onclick="window.location.href='/admin/personal'">
+                    <div class="analytics-card-up">
+                        <img src="{{url_for('static', filename='svg/ad_svg/personal.svg')}}" alt="Personal" class="analytics-icon">
+                        <h2>Personal</h2>
+                    </div>
+                    <p>{{ personal_count }}</p>
+                </div>
+            </div>
+        </div>        
+    </main>
+{% endblock %}

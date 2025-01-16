@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block titulo %}Alquilar Auto{% endblock %}
+
+{% block body %}
+<main class="main_alquilar_auto">
+    <h1>Alquilar {{ auto.marca }} {{ auto.modelo }}</h1>
+    <img src="{{ url_for('static', filename=auto.imagen.replace('static/', '').replace('\\', '/')) }}" alt="{{ auto.modelo }}">
+    <p>Marca: {{ auto.marca }}</p>
+    <p>Modelo: {{ auto.modelo }}</p>
+    <p>Año: {{ auto.año }}</p>
+    <p>Precio por día: ${{ auto.precio_dia }}</p>
+
+    <form method="POST" data-precio-dia="{{ auto.precio_dia }}">
+        <label for="fecha_inicio">Fecha de inicio:</label>
+        <input type="date" id="fecha_inicio" name="fecha_inicio" required>
+        
+        <label for="fecha_fin">Fecha de fin:</label>
+        <input type="date" id="fecha_fin" name="fecha_fin" required>
+        
+        <p>Precio total: $<span id="precio_total">0.00</span></p>
+        
+        <button type="submit">Pagar</button>
+    </form>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form[data-precio-dia]');
+    const fechaInicioInput = document.getElementById('fecha_inicio');
+    const fechaFinInput = document.getElementById('fecha_fin');
+    const precioTotalSpan = document.getElementById('precio_total');
+    const precioPorDia = parseFloat(form.getAttribute('data-precio-dia'));
+
+    function calcularPrecioTotal() {
+        const fechaInicio = new Date(fechaInicioInput.value);
+        const fechaFin = new Date(fechaFinInput.value);
+        if (fechaInicio && fechaFin && fechaFin > fechaInicio) {
+            const dias = (fechaFin - fechaInicio) / (1000 * 60 * 60 * 24);
+            const precioTotal = dias * precioPorDia;
+            precioTotalSpan.textContent = precioTotal.toFixed(2);
+        } else {
+            precioTotalSpan.textContent = '0.00';
+        }
+    }
+
+    fechaInicioInput.addEventListener('change', calcularPrecioTotal);
+    fechaFinInput.addEventListener('change', calcularPrecioTotal);
+});
+</script>
+{% endblock %}

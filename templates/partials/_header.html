@@ -1,0 +1,112 @@
+<header>
+    <nav>
+        <a href="/"><img src="{{url_for('static', filename='images/logo.png')}}" alt="" class="logo"></a>        
+        <div class="navigation">
+            <a href="/" class="opt">Inicio</a>
+            <a href="/catalogo" class="opt">Autos</a>
+            <a href="" class="opt">Locales</a>
+            <a href="" class="opt">Contacto</a>
+        </div>
+        {% if current_user.is_authenticated %}
+            <div class="loged-state">
+                <p>Bienvenido <span id="header-Username">{{ current_user.nombre }}</span></p>                
+                <div class="dropdown">
+                    <button class="dropbtn"><img src="{{url_for('static', filename='svg/arrow-down.svg')}}" alt=""></button>
+                    <div class="dropdown-content">
+                        <a href="/account">Cuenta</a>
+                        <a href="/history">Historial</a>
+                        {% if current_user.rol == 'admin' %}
+                            <a href="/admin">Admin</a>
+                        {% endif %}
+                        <button class="logout-button" id="header-Logout" onclick="window.location.href='/logout'">Logout</button>
+                    </div>
+                </div>
+            </div>         
+        {% else %}
+            <a class="account" id="header-Signin">Sign In</a>
+        {% endif %}
+    </nav>
+    <dialog id="signinDialog" class="signinDialog">
+        <div class="container">
+            <div class="left-section">
+                <div class="formImage">
+                    <h1>Nueva manera <br>de alquilar <br>Autos</h1>
+                    <div class="imageBottom">
+                        <p>Ya tiene cuenta??</p>
+                        <button class="login-btn" id="form-login-btn">Login</button>
+                    </div>
+                </div>
+            </div>
+            <div class="right-section">
+                <button class="close-btn" id="close-register">&times;</button>
+                <div class="fomrMainCont">
+                    <img src="{{url_for('static', filename='images/logo.png')}}" alt="" class="formLogo">
+                    <div class="formTitle">
+                        <h2>Cuentanos sobre ti</h2>
+                        <p>Ingresa tus datos para seguir con el registro</p>
+                    </div>
+                    <form action="/newuser" method="POST" onsubmit="submitForm(event)">
+                        <input type="email" id="email" name="email" placeholder="Email" required>
+                        
+                        <div class="inputGrup">
+                            <input type="text" id="first-name" name="first-name" placeholder="Nombre" required>
+            
+                            <input type="text" id="last-name" name="last-name" placeholder="Apellido" required>
+                        </div>
+        
+                        <input type="password" id="password" name="password" placeholder="Contraseña" required>
+        
+                        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirmar Contraseña" required>
+        
+                        <div class="inputGrup">
+                            <input type="text" id="license-number" name="license-number" placeholder="Nro. Licenciea" required>
+        
+                            <input type="text" id="dni-number" name="dni-number" placeholder="Nro. DNI" required>
+                        </div>
+        
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <p>Acepto los <a href="">Terminos</a> y <a href="">Condiciones</a></p>
+                        </div>
+                        <button type="submit">Continuar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <dialog id="loginDialog" class="loginDialog">
+        <div class="container">
+            <div class="left-section">
+                <div class="formImage">
+                    <h1>Nueva manera <br>de alquilar <br>Autos</h1>
+                    <div class="imageBottom">
+                        <p>No tiene cuenta??</p>
+                        <button class="login-btn" id="form-register-btn">Register</button>
+                    </div>
+                </div>
+            </div>
+            <div class="right-section">
+                <button class="close-btn" id="close-login">&times;</button>
+                <div class="fomrMainCont fomrMainContlogin">
+                    <img src="{{url_for('static', filename='images/logo.png')}}" alt="" class="formLogo">
+                    <div class="formTitle">
+                        <h2>Bienvenido</h2>
+                        <p>Ingresa tus datos para entrar a tu cuenta</p>
+                    </div>
+                    <form action="/login" method="POST" onsubmit="submitFormLogin(event)">
+                        <input class="loginInput" type="email" id="email" name="email" placeholder="Email" required>
+                        
+                        <input class="loginInput" type="password" id="password" name="password" placeholder="Contraseña" required>
+                        
+                        <div class="checkbox-container">
+                            <input class="loginInput" type="checkbox" id="terms" name="terms" required>
+                            <p>Acepto los <a href="">Terminos</a> y <a href="">Condiciones</a></p>
+                        </div>
+                        <button type="submit">Continuar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </dialog>
+</header> 
