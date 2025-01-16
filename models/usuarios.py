@@ -9,7 +9,7 @@ class Usuario(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(50), nullable=False)
     apellido = db.Column(db.String(50), nullable=False)
-    correo = db.Column(db.String(50), nullable=False, unique=True)
+    correo = db.Column(db.String(50), nullable=False)
     contrasena = db.Column(db.String(50), nullable=False)
     nroLicencia = db.Column(db.String(50), nullable=False)
     nroDni = db.Column(db.String(50), nullable=False)
