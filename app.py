@@ -15,9 +15,9 @@ load_dotenv()
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:va1Mq6v9mZyH8PH7@db.kcayihbvxqjieigbnwwh.supabase.co:5432/postgres'
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
+app.config['SECRET_KEY'] = "n8sWbgUS49"
 
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
