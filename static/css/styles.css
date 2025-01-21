@@ -810,3 +810,152 @@ form button:hover {
 .btn-alquilar_card-catalogo:hover{
   background-color: #5d38c2;
 }
+
+/* Aluiler Autos Inicio */
+
+.main_alquilar_auto{
+  margin-top: 150px;
+  font-family: "League Spartan", serif;  
+  width: 100% !important;  
+}
+
+.alquiler_Auto-Logo{
+  width: 64px;
+  margin: 0 0 30px 0; 
+}
+
+.topInfo-Rent{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h1{
+      font-size: 4.1rem;
+      margin: 10px 0;
+  }
+  p{
+      font-size: 1.3rem;
+      margin: 10px 0 20px 0;
+  }
+}
+
+.alquiler_Btn{
+  padding: 15px 30px;
+  background-color: #252525;
+  color: #fff;
+  border-radius: 10px;
+}
+
+.autoImage_AlquilerContainer {
+  width: 100%;
+  height: 640px;
+  position: relative;
+  z-index: 2;
+}
+
+.autoImage_AlquilerContainer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgb(255, 255, 255) 2.05983%, rgba(255, 255, 255, 0) 50.2621%);
+  z-index: 3;
+}
+
+.autoImage_Alquiler {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  object-position: center;
+  position: relative;
+  z-index: 1;
+}
+
+.carInfo_Alquiler{
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  padding: 50px 0;
+  p{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 2em;
+      font-weight: 600;
+
+  }
+  span{
+      font-size: .7em !important;        
+      color: #8f8f8f;
+  }
+}
+
+dialog{
+
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  border: none;
+  background-color: rgba(102, 102, 102, 0.5);
+  backdrop-filter: blur(5px);
+  position: fixed;
+  top: 0;
+  font-family: "League Spartan", sans-serif;
+  z-index: 99;
+}
+
+.modal-content{
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  width: 40%;
+  position: relative;
+  h4{
+      font-size: 2em;
+  }
+  form{
+      display: flex;
+      flex-direction: column;
+      width: 90%;
+      margin: 30px auto;
+      gap: 15px;
+      font-size: 1.3em;
+      font-weight: 600;
+  }
+  input{
+      padding: 10px;
+      font-size: 1em;
+  }
+}
+
+.modal-btn_alquiler{
+  color: #fff;
+  background-color: #000;
+  border: none;
+  border-radius: 10px;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.modal-btn_alquiler:hover{
+  background-color: #3f3f3f !important;
+  transition: .5s;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Aluiler Autos Fin */

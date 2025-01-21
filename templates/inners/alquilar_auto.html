@@ -4,48 +4,41 @@
 
 {% block body %}
 <main class="main_alquilar_auto">
-    <h1>Alquilar {{ auto.marca }} {{ auto.modelo }}</h1>
-    <img src="{{ url_for('static', filename=auto.imagen.replace('static/', '').replace('\\', '/')) }}" alt="{{ auto.modelo }}">
-    <p>Marca: {{ auto.marca }}</p>
-    <p>Modelo: {{ auto.modelo }}</p>
-    <p>Año: {{ auto.año }}</p>
-    <p>Precio por día: ${{ auto.precio_dia }}</p>
-
-    <form method="POST" data-precio-dia="{{ auto.precio_dia }}">
-        <label for="fecha_inicio">Fecha de inicio:</label>
-        <input type="date" id="fecha_inicio" name="fecha_inicio" required>
-        
-        <label for="fecha_fin">Fecha de fin:</label>
-        <input type="date" id="fecha_fin" name="fecha_fin" required>
-        
-        <p>Precio total: $<span id="precio_total">0.00</span></p>
-        
-        <button type="submit">Pagar</button>
-    </form>
+    <div class="topInfo-Rent">            
+        <img src="{{ url_for('static', filename='images/catalogo/logosMarca/' ~ auto.marca ~ 'Logo.webp') }}" alt="{{ auto.modelo }} Logo" class="alquiler_Auto-Logo">
+        <h1>{{ auto.marca }} {{ auto.modelo }}</h1>
+        <p> Economy • Modelo {{ auto.año }}</p>
+        <a href="" class="alquiler_Btn" id="openModal">Alquilar | ${{ auto.precio_dia }}/dia</a>
+    </div>
+    <div class="autoImage_AlquilerContainer">
+        <img src="{{ url_for('static', filename=auto.imagen.replace('static/', '').replace('\\', '/')) }}" alt="{{ auto.modelo }}" class="autoImage_Alquiler">
+    </div>
+    <div class="carInfo_Alquiler">
+        <p>{{ auto.marca }} <span>Marca</span> </p>
+        <p>{{ auto.modelo }} <span>Modelo</span> </p>
+        <p>{{ auto.año }} <span>Año</span> </p>
+        <p>${{ auto.precio_dia }} <span>Precio</span> </p>
+    </div>
+    <hr>
+    <!-- Modal Structure -->
+    <dialog id="alquilar-Modal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <h4>Alquilar Auto</h4>
+            <form method="POST" data-precio-dia="50.0">
+                <label for="fecha_inicio">Fecha de inicio:</label>
+                <input type="date" id="fecha_inicio" name="fecha_inicio" required>
+                
+                <label for="fecha_fin">Fecha de fin:</label>
+                <input type="date" id="fecha_fin" name="fecha_fin" required>
+                
+                <p>Precio total: $<span id="precio_total">0.00</span></p>
+                
+                <button type="submit" class="modal-btn_alquiler">Alquilar</button>
+            </form>
+        </div>
+    </dialog>
 </main>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('form[data-precio-dia]');
-    const fechaInicioInput = document.getElementById('fecha_inicio');
-    const fechaFinInput = document.getElementById('fecha_fin');
-    const precioTotalSpan = document.getElementById('precio_total');
-    const precioPorDia = parseFloat(form.getAttribute('data-precio-dia'));
-
-    function calcularPrecioTotal() {
-        const fechaInicio = new Date(fechaInicioInput.value);
-        const fechaFin = new Date(fechaFinInput.value);
-        if (fechaInicio && fechaFin && fechaFin > fechaInicio) {
-            const dias = (fechaFin - fechaInicio) / (1000 * 60 * 60 * 24);
-            const precioTotal = dias * precioPorDia;
-            precioTotalSpan.textContent = precioTotal.toFixed(2);
-        } else {
-            precioTotalSpan.textContent = '0.00';
-        }
-    }
-
-    fechaInicioInput.addEventListener('change', calcularPrecioTotal);
-    fechaFinInput.addEventListener('change', calcularPrecioTotal);
-});
-</script>
+<script src="{{ url_for('static', filename='js/alquiler.js') }}"></script>
 {% endblock %}
