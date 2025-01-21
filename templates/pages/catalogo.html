@@ -25,7 +25,7 @@
         <img class="card_img-catalogo" src="{{ url_for('static', filename=auto.imagen.replace('static/', '').replace('\\', '/')) }}" alt="{{ auto.modelo }}">
         <div class="card_info-catalogo">
             <div class="card_info-catalogo_top">
-                <img src="{{ url_for('static', filename=('images/catalogo/logosMarca/' ~ auto.marca ~ 'logo.webp')|lower) }}" alt="{{ auto.marca }}" class="card_marca-logo_catalogo">
+                <img src="{{ url_for('static', filename=('images/catalogo/logosMarca/' ~ auto.marca ~ 'Logo.webp')|lower) }}" alt="{{ auto.marca }}" class="card_marca-logo_catalogo">
                 <div>
                     <h2>{{ auto.marca }} {{ auto.modelo }}</h2>
                     <p>{{ auto.año }} <span>• {{ auto.placa }}</span></p>
