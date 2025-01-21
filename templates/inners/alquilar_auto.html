@@ -5,7 +5,7 @@
 {% block body %}
 <main class="main_alquilar_auto">
     <div class="topInfo-Rent">            
-        <img src="{{ url_for('static', filename='images/catalogo/logosMarca/' ~ auto.marca ~ 'Logo.webp') }}" alt="{{ auto.modelo }} Logo" class="alquiler_Auto-Logo">
+        <img src="{{ url_for('static', filename='images/catalogo/logosmarca/' ~ auto.marca ~ 'logo.webp') }}" alt="{{ auto.modelo }} Logo" class="alquiler_Auto-Logo">
         <h1>{{ auto.marca }} {{ auto.modelo }}</h1>
         <p> Economy • Modelo {{ auto.año }}</p>
         <a href="" class="alquiler_Btn" id="openModal">Alquilar | ${{ auto.precio_dia }}/dia</a>
