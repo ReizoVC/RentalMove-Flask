@@ -18,8 +18,25 @@
                     </div>
                     <input type="text" name="marca" id="marca" placeholder="Marca" required>
                     <input type="text" name="modelo" id="modelo" placeholder="Modelo" required>
-                    <input type="text" name="placa" id="placa" placeholder="Placa" required>
-                    <input type="number" name="año" id="año" placeholder="Año" required>
+                    <select name="transmision" id="transmision" required>
+                        <option value="">Transmision</option>
+                        <option value="Manual">Manual</option>
+                        <option value="Automatica">Automatico</option>
+                    </select>
+                    <select name="traccion" id="traccion" required>
+                        <option value="">Traccion</option>
+                        <option value="FWD">FWD</option>
+                        <option value="RWD">RWD</option>
+                        <option value="AWD">AWD</option>
+                    </select>
+                    <input type="number" name="potencia" id="potencia" placeholder="Potencia (HP)" required>
+                    <input type="number" name="stock" id="stock" placeholder="Stock" required>
+                    <select name="categoria" id="categoria" required>
+                        <option value="">Categoria</option>
+                        <option value="Economico">Economico</option>
+                        <option value="Deportivo">Deportivo</option>
+                        <option value="Exotico">Exotico</option>
+                    </select>
                     <div class="cont-bottom">
                         <input type="number" step="0.01" name="precio_dia" id="precioDia" placeholder="Precio/Dia" required>
                         <select name="disponibilidad" id="disponibilidad" required>                            
@@ -30,7 +47,6 @@
                     </div>
                 </form>
             </div>                     
-            
         </dialog>        
         <div class="header-ad_auto">
             <h1>Lista de Vehiculos</h1>
@@ -42,25 +58,31 @@
                     <th>Imagen</th>
                     <th>Marca</th>
                     <th>Modelo</th>
-                    <th>Placa</th>
-                    <th>Año</th>
-                    <th>Disponibilidad</th>
+                    <th>Transmision</th>
+                    <th>Traccion</th>
+                    <th>Potencia</th>
                     <th>Precio/Dia</th>
+                    <th>Stock</th>
+                    <th>Categoria</th>
+                    <th>Disponibilidad</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody class="admin-table-row">
+            <tbody class="admin-table-row admin-table-row-autos">
                 {% for auto in autos %}
                 <tr >
                     <td><img src="{{ url_for('static', filename=auto.imagen.replace('static/', '').replace('\\', '/')) }}" alt="Imagen del auto" class="admin-form-img"></td>
                     <td>{{ auto.marca }}</td>
                     <td>{{ auto.modelo }}</td>
-                    <td>{{ auto.placa }}</td>
-                    <td>{{ auto.año }}</td>
-                    <td>{{ auto.disponibilidad }}</td>
+                    <td>{{ auto.transmision }}</td>
+                    <td>{{ auto.traccion }}</td>
+                    <td>{{ auto.potencia }}</td>
                     <td>{{ auto.precio_dia }}</td>
+                    <td>{{ auto.stock }}</td>
+                    <td>{{ auto.categoria }}</td>
+                    <td>{{ auto.disponibilidad }}</td>
                     <td>
-                        <button class="edit-auto-btn" data-id="{{ auto.id }}" data-imagen="{{ auto.imagen }}" data-marca="{{ auto.marca }}" data-modelo="{{ auto.modelo }}" data-placa="{{ auto.placa }}" data-año="{{ auto.año }}" data-precio_dia="{{ auto.precio_dia }}" data-disponibilidad="{{ auto.disponibilidad }}"><img src="{{ url_for('static', filename='svg/admin_icons/editar.svg') }}" alt="Editar"></button>
+                        <button class="edit-auto-btn" data-id="{{ auto.id }}" data-imagen="{{ auto.imagen }}" data-marca="{{ auto.marca }}" data-modelo="{{ auto.modelo }}" data-precio_dia="{{ auto.precio_dia }}" data-disponibilidad="{{ auto.disponibilidad }}" data-transmision="{{ auto.transmision }}" data-traccion="{{ auto.traccion }}" data-potencia="{{ auto.potencia }}" data-stock="{{ auto.stock }}" data-categoria="{{ auto.categoria }}"><img src="{{ url_for('static', filename='svg/admin_icons/editar.svg') }}" alt="Editar"></button>
                         <form action="{{ url_for('admn.eliminar_auto', auto_id=auto.id) }}" method="POST" class="delete-auto-form" style="display:inline;">
                             <button type="submit" class="delete-auto-btn"><img src="{{ url_for('static', filename='svg/admin_icons/eliminar.svg') }}" alt="Eliminar"></button>
                         </form>

@@ -168,18 +168,24 @@ document.addEventListener('DOMContentLoaded', function() {
                     const autoId = this.getAttribute('data-id');
                     const autoMarca = this.getAttribute('data-marca');
                     const autoModelo = this.getAttribute('data-modelo');
-                    const autoPlaca = this.getAttribute('data-placa');
-                    const autoAño = this.getAttribute('data-año');
                     const autoPrecioDia = this.getAttribute('data-precio_dia');
                     const autoDisponibilidad = this.getAttribute('data-disponibilidad') === 'true';
+                    const autoTransmision = this.getAttribute('data-transmision');
+                    const autoTraccion = this.getAttribute('data-traccion');
+                    const autoPotencia = this.getAttribute('data-potencia');
+                    const autoStock = this.getAttribute('data-stock');
+                    const autoCategoria = this.getAttribute('data-categoria');
 
                     autoIdInput.value = autoId;
                     document.getElementById('marca').value = autoMarca;
                     document.getElementById('modelo').value = autoModelo;
-                    document.getElementById('placa').value = autoPlaca;
-                    document.getElementById('año').value = autoAño;
                     document.getElementById('precioDia').value = autoPrecioDia;
                     document.getElementById('disponibilidad').value = autoDisponibilidad ? 'true' : 'false';
+                    document.getElementById('transmision').value = autoTransmision;
+                    document.getElementById('traccion').value = autoTraccion;
+                    document.getElementById('potencia').value = autoPotencia;
+                    document.getElementById('stock').value = autoStock;
+                    document.getElementById('categoria').value = autoCategoria;
 
                     autoForm.action = "/admin/vehiculos/actualizar";
                     if (modalTitle) {

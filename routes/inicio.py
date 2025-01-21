@@ -74,6 +74,7 @@ def alquilar_auto(auto_id):
         fecha_fin = request.form['fecha_fin']
         dias = (datetime.strptime(fecha_fin, '%Y-%m-%d') - datetime.strptime(fecha_inicio, '%Y-%m-%d')).days
         precio_total = dias * auto.precio_dia
+        status = 'pendiente'  # Default status
 
         # Guardar la transacción en la base de datos
         transaccion = Prestamo(
@@ -81,7 +82,8 @@ def alquilar_auto(auto_id):
             auto_id=auto.id,
             fecha_inicio=fecha_inicio,
             fecha_fin=fecha_fin,
-            precio_total=precio_total
+            precio_total=precio_total,
+            status=status
         )
         db.session.add(transaccion)
         db.session.commit()

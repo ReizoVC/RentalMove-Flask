@@ -710,10 +710,9 @@ form button:hover {
 }
 
 .filters-catalog{
-  width: 40vw;
   margin: 100px auto;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   font-family: "League Spartan";
   font-size: 1.5em;
   font-weight: 600;

@@ -212,6 +212,10 @@ nav ul li a {
     margin-bottom: 5%;    
 }
 
+.admin-table-header-autos, .admin-table-row-autos tr{
+    grid-template-columns: repeat(11, 1fr) !important;
+}
+
 .admin-table-header-personal, .admin-table-row-personal tr{
     grid-template-columns: repeat(7, 1fr) !important;
 }
@@ -353,7 +357,10 @@ form input,select{
 
 .admin-form-img{
     height: 100px;
+    max-width: 50%;
     border-radius: 10px;
+    object-fit: cover;
+    object-position: center;
 }
 
 

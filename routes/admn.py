@@ -10,6 +10,8 @@ from utils.modules import get_vehicle_count, get_user_count, get_personal_count
 
 admn = Blueprint('admn', __name__)
 
+# Principales
+
 @admn.route('/admin')
 @admin_required
 def admin():
@@ -42,7 +44,7 @@ def admin_personal():
 
 
 
-
+# Agregando
 
 
 
@@ -60,17 +62,20 @@ def nuevo_auto():
         if file:
             filename = secure_filename(file.filename)
             file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
-            imagen = os.path.join('static/uploads', filename)  # Asegúrate de que la ruta sea correcta
-            placa = request.form['placa']
+            imagen = os.path.join('static/uploads', filename)
             modelo = request.form['modelo']
             marca = request.form['marca']
-            año = request.form['año']
-            disponibilidad = request.form['disponibilidad'].lower() == 'true'  # Convertir a booleano
+            transmision = request.form['transmision']
+            traccion = request.form['traccion']
+            potencia = request.form['potencia']
+            stock = request.form['stock']
+            categoria = request.form['categoria']
+            disponibilidad = request.form['disponibilidad'].lower() == 'true'
             precio_dia = request.form['precio_dia']
-            nuevo_auto = Auto(imagen=imagen, placa=placa, modelo=modelo, marca=marca, año=año, disponibilidad=disponibilidad, precio_dia=precio_dia)
+            nuevo_auto = Auto(imagen=imagen, modelo=modelo, marca=marca, transmision=transmision, traccion=traccion, potencia=potencia, stock=stock, categoria=categoria, disponibilidad=disponibilidad, precio_dia=precio_dia)
             db.session.add(nuevo_auto)
             db.session.commit()
-            flash('Auto creado exitosamente')            
+            flash('Auto creado exitosamente')
     return redirect('/admin/vehiculos')
 
 
@@ -112,7 +117,7 @@ def nuevo_usuario():
 
 
 
-
+# Actualizando
 
 
 @admn.route('/admin/usuarios/actualizar', methods=['POST'])
@@ -200,12 +205,15 @@ def actualizar_auto():
             imagen.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
             auto.imagen = filename
 
-    auto.placa = request.form['placa']
     auto.modelo = request.form['modelo']
     auto.marca = request.form['marca']
-    auto.año = request.form['año']
+    auto.transmision = request.form['transmision']
+    auto.traccion = request.form['traccion']
+    auto.potencia = request.form['potencia']
+    auto.stock = request.form['stock']
+    auto.categoria = request.form['categoria']
     auto.precio_dia = float(request.form['precio_dia'])
-    auto.disponibilidad = request.form['disponibilidad'].lower() == 'true'  # Convertir a booleano
+    auto.disponibilidad = request.form['disponibilidad'].lower() == 'true'
 
     db.session.commit()
     
@@ -214,7 +222,7 @@ def actualizar_auto():
 
 
 
-
+#Eliminando
 
 
 

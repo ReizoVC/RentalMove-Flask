@@ -13,11 +13,11 @@
         <button class="searchbar-catalog_button" ></button>
     </div>
     <div class="filters-catalog">
-        <p>Marca</p>
-        <p>Año</p>
-        <p>Color</p>
-        <p>Tipo</p>
-        <p>Local</p>
+        <p>Economicos</p>
+        <p>Deportivos</p>
+        <p>Exoticos</p>
+        <p>Automaticos</p>
+        <p>Manuales</p>
     </div>
     <div class="cards-container-catalgo">
         {% for auto in autos %}
@@ -28,7 +28,7 @@
                 <img src="{{ url_for('static', filename=('images/logosmarca/' ~ auto.marca ~ 'logo.webp')|lower) }}" alt="{{ auto.marca }}" class="card_marca-logo_catalogo">
                 <div>
                     <h2>{{ auto.marca }} {{ auto.modelo }}</h2>
-                    <p>{{ auto.año }} <span>• {{ auto.placa }}</span></p>
+                    <p>{{ auto.transmision }} <span>• {{ auto.traccion }}</span></p>
                 </div>
             </div>
             <div class="card_info-catalogo_bottom">
