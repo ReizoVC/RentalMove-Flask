@@ -4,6 +4,7 @@ from utils.decorators import admin_required
 from models.autos import Auto
 from models.personal import Personal
 from models.usuarios import Usuario
+from models.prestamos import Prestamo
 import os
 from werkzeug.utils import secure_filename
 from utils.modules import get_vehicle_count, get_user_count, get_personal_count
@@ -18,7 +19,8 @@ def admin():
     vehicle_count = get_vehicle_count()
     user_count = get_user_count()
     personal_count = get_personal_count()
-    return render_template('adminPages/ad_home.html', vehicle_count=vehicle_count, user_count=user_count, personal_count=personal_count)
+    prestamos = db.session.query(Prestamo, Usuario, Auto).join(Usuario, Prestamo.usuario_id == Usuario.id).join(Auto, Prestamo.auto_id == Auto.id).all()
+    return render_template('adminPages/ad_home.html', vehicle_count=vehicle_count, user_count=user_count, personal_count=personal_count, prestamos=prestamos)
 
 
 @admn.route('/admin/vehiculos')
@@ -253,3 +255,12 @@ def eliminar_auto(auto_id):
     db.session.commit()
     flash('Auto eliminado exitosamente')
     return redirect(url_for('admn.admin_autos'))
+
+@admn.route('/admin/prestamos/aprobar/<int:prestamo_id>', methods=['POST'])
+@admin_required
+def aprobar_prestamo(prestamo_id):
+    prestamo = Prestamo.query.get_or_404(prestamo_id)
+    prestamo.status = 'aprobado'
+    db.session.commit()
+    flash('Prestamo aprobado exitosamente')
+    return redirect(url_for('admn.admin'))

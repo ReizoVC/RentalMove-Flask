@@ -28,6 +28,43 @@
                     <p>{{ personal_count }}</p>
                 </div>
             </div>
-        </div>        
+        </div>
+        <div class="loans">
+            <h2>Prestamos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Usuario</th>
+                        <th>Auto</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Fin</th>
+                        <th>Precio Total</th>
+                        <th>Status</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for prestamo in prestamos %}
+                    <tr>
+                        <td>{{ prestamo.Prestamo.id }}</td>
+                        <td>{{ prestamo.Usuario.nombre }} {{ prestamo.Usuario.apellido }}</td>
+                        <td>{{ prestamo.Auto.marca }} {{ prestamo.Auto.modelo }}</td>
+                        <td>{{ prestamo.Prestamo.fecha_inicio }}</td>
+                        <td>{{ prestamo.Prestamo.fecha_fin }}</td>
+                        <td>${{ prestamo.Prestamo.precio_total }}</td>
+                        <td>{{ prestamo.Prestamo.status }}</td>
+                        <td>
+                            {% if prestamo.Prestamo.status == 'pendiente' %}
+                            <form action="{{ url_for('admn.aprobar_prestamo', prestamo_id=prestamo.Prestamo.id) }}" method="POST">
+                                <button type="submit">Aprobar</button>
+                            </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </main>
 {% endblock %}
