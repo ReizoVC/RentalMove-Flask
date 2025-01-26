@@ -1,11 +1,12 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_socketio import SocketIO, emit, join_room
 from sqlalchemy.orm import Session
 from routes.inicio import inicio
 from routes.admn import admn
 from routes.errors import errors
 from utils.db import db
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
 from models.usuarios import Usuario
 from models.autos import Auto
 from models.personal import Personal
@@ -15,6 +16,7 @@ from os import environ
 load_dotenv()
 
 app = Flask(__name__)
+socketio = SocketIO(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -45,5 +47,10 @@ with app.app_context():
     db.create_all()
 
 
+@socketio.on('connect')
+def handle_connect():
+    if current_user.is_authenticated:
+        join_room(current_user.id)
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app, debug=True)

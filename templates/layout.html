@@ -18,8 +18,21 @@
     {% endblock %}
 
     {% include('partials/_footer.html') %}
+    <div id="notificationPopup" class="notification-popup"></div>
 
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ url_for('static', filename='js/home.js') }}"></script>
+    <script>
+        const socket = io();
+        socket.on('notification', function(data) {
+            const notificationPopup = document.getElementById('notificationPopup');
+            notificationPopup.textContent = data.message;
+            notificationPopup.style.display = 'block';
+            setTimeout(() => {
+                notificationPopup.style.display = 'none';
+            }, 3000);
+        });
+    </script>
 </body>
 </html>

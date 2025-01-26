@@ -8,6 +8,7 @@ from models.prestamos import Prestamo
 import os
 from werkzeug.utils import secure_filename
 from utils.modules import get_vehicle_count, get_user_count, get_personal_count
+from flask_socketio import emit
 
 admn = Blueprint('admn', __name__)
 
@@ -262,5 +263,6 @@ def aprobar_prestamo(prestamo_id):
     prestamo = Prestamo.query.get_or_404(prestamo_id)
     prestamo.status = 'aprobado'
     db.session.commit()
+    emit('notification', {'message': 'Tu préstamo ha sido aprobado'}, room=prestamo.usuario_id, namespace='/')
     flash('Prestamo aprobado exitosamente')
     return redirect(url_for('admn.admin'))
