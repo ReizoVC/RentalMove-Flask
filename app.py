@@ -1,6 +1,9 @@
+import eventlet
+eventlet.monkey_patch()
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_socketio import SocketIO, emit, join_room
+from flask_socketio import SocketIO, emit, join_room, disconnect
 from sqlalchemy.orm import Session
 from routes.inicio import inicio
 from routes.admn import admn
@@ -14,10 +17,12 @@ from dotenv import load_dotenv
 from os import environ
 from flask_cors import CORS
 
+
+
 load_dotenv()
 
 app = Flask(__name__)
-socketio = SocketIO(app)
+socketio = SocketIO(app, async_mode='eventlet', logger=True, engineio_logger=True)
 CORS(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URL')
@@ -51,8 +56,11 @@ with app.app_context():
 
 @socketio.on('connect')
 def handle_connect():
-    if current_user.is_authenticated:
+    if not current_user.is_authenticated:
+        disconnect()
+    else:
         join_room(current_user.id)
+
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
