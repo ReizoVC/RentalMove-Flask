@@ -12,11 +12,13 @@ from models.autos import Auto
 from models.personal import Personal
 from dotenv import load_dotenv
 from os import environ
+from flask_cors import CORS
 
 load_dotenv()
 
 app = Flask(__name__)
 socketio = SocketIO(app)
+CORS(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
