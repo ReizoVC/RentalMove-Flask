@@ -80,7 +80,7 @@ nav {
     text-align: center;
     display: flex;
     align-items: center;
-    padding: 5px 20px;
+    padding: 8px 20px;
     border-radius: 10px;
     cursor: pointer;
     font-weight: 600;
@@ -88,19 +88,18 @@ nav {
 }
 
 .account-LogIn {
-  border: 2px solid #000;
+  border: 2px solid #7D4DFF;
 }
 
 .account-SignIn {
   color: #fff;
-  background-color: #000;
+  background-color: #7D4DFF;
 }
 .account-SignIn:hover {
-  background-color: #FFD600;
-  color: #000;
+  background-color: #50339e;
 }
 .account-LogIn:hover {
-  border-color: #333;
+  border-color: #50339e;
 }
 
 main {
@@ -256,8 +255,7 @@ main {
 }
 
 .rent-button:hover {
-  background-color: #FFD600;
-  color: #000;
+  color: #7D4DFF;
 }
 
 .pagination span {
@@ -309,11 +307,16 @@ footer {
   margin: 0 10px;
 }
 
+
 .footer-icons img {
   width: 30px;
   height: 30px;
   background-color: #fff;
   border-radius: 5px;
+}
+
+.footer-icons img:hover {
+  background-color: #d5c6ff;
 }
 
 .footer-logo {
@@ -359,7 +362,7 @@ footer {
   cursor: default;
 }
 .footerCredits a {
-  color: #FFD600;
+  color: #7D4DFF;
   font-weight: 800;
 }
 
@@ -617,11 +620,11 @@ form button {
   font-size: 1.2em;
 }
 .loged-state span {
-  color: #000;
+  color: #7D4DFF;
   margin-right: 10px;
 }
 .loged-state .dropbtn {
-  background-color: #FFD600;
+  background-color: #7D4DFF;
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
@@ -629,7 +632,7 @@ form button {
   display: flex;
 }
 .loged-state .dropbtn:hover {
-  background-color: #977e00;
+  background-color: #50339e;
   color: #000;
 }
 
@@ -640,7 +643,7 @@ form button {
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
-  transform: translate(-85%);
+  transform: translate(-78%);
 }
 
 .lgdopt {
@@ -671,7 +674,7 @@ form button {
 .dropdown:hover .dropdown-content {
   display: flex;
   flex-direction: column;
-  border-radius: 5px 0 5px 5px;
+  border-radius: 16px;
 }
 
 .logout-button {
@@ -679,16 +682,15 @@ form button {
   margin: 6px 8px;
   padding: 6px 8px;
   cursor: pointer;
-  background-color: #FFD600;
+  background-color: #7D4DFF;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: .8em;
   font-weight: 600;
 }
 
 .logout-button:hover {
-  background-color: #000;
-  color: #D9D9D9;
+  background-color: #50339e;
 }
 
 /* catalogo */
@@ -751,7 +753,7 @@ form button {
 
 .filters-catalog p:hover {
   background-color: #000;
-  color: #FFD600;
+  color: #7D4DFF;
 }
 
 .cards-container-catalgo {
@@ -831,8 +833,7 @@ form button {
 }
 
 .btn-alquilar_card-catalogo:hover {
-  background-color: #FFD600;
-  color: #000;
+  color: #7D4DFF;
 }
 
 /* Aluiler Autos Inicio */
@@ -871,7 +872,7 @@ form button {
 }
 
 .alquiler_Btn:hover{
-  color: #FFD600;
+  color: #7D4DFF;
 }
 
 .autoImage_AlquilerContainer {
@@ -970,7 +971,7 @@ dialog {
 }
 
 .modal-btn_alquiler:hover {
-  color: #FFD600;
+  color: #7D4DFF;
   background-color: #000;
   transition: .5s;
 }

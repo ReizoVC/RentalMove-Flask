@@ -49,7 +49,7 @@
                 <tbody class="admin-prestamo-row">
                     {% for prestamo in prestamos %}
                     <tr>
-                        <td>🟪{{ prestamo.Prestamo.id }}</td>
+                        <td>🟪#{{ prestamo.Prestamo.id }}</td>
                         <td class="name-prestamo">{{ prestamo.Usuario.nombre }} {{ prestamo.Usuario.apellido }} <span class="email"><br>{{ prestamo.Usuario.correo }}</span></td>
                         <td class="car-prestamo">{{ prestamo.Auto.marca }} {{ prestamo.Auto.modelo }}</td>
                         <td>{{ prestamo.Prestamo.fecha_inicio.strftime('%b %d, %Y') }}</td>
