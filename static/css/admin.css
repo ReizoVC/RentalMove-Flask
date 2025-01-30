@@ -449,3 +449,135 @@ form input,select{
 .flash-message.error {
     background-color: #f44336;
 }
+
+/* Prestamo Table inicio */
+
+.loans {
+    width: 75vw;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 4px 4px 16.6px 0px rgba(16, 25, 52, 0.40);
+    overflow-x: auto; /* Add this line to handle overflow */
+    margin: 0 auto; /* Center the table */
+}
+
+.loans h2 {
+    font-family: "Afacad", serif;
+    font-size: 2em;
+    font-weight: 500;
+    margin: 0 0 50px 0; /* Adjust margin to remove extra space */
+    text-align: center;
+}
+
+.prestamos-adm {
+    font-family: "Mona Sans", serif;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.prestamos-adm tbody tr {
+    height: 100px;
+    border-top: solid .6px #7D4DFF;
+}
+
+.admin-prestamo-header, .admin-prestamo-row tr {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    justify-items: left;
+    align-content: center;
+    gap: 30px;
+    padding-left: 30px;
+}
+
+.admin-prestamo-header {
+    padding-bottom: 20px;
+    color: #000;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Afacad;
+    font-size: 1.2em;
+    font-weight: 600;
+    line-height: 10px;
+}
+
+.admin-prestamo-header th {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-prestamo-row td {
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+}
+
+.name-prestamo {
+    grid-column: 2 / 4;
+    display: inline !important;
+}
+
+.car-prestamo {
+    grid-column: 4 / 6;
+}
+
+.status p {
+    color: #fff;
+    font-size: .8em;
+    display: flex;
+    padding: 2px 6px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 5px;
+}
+
+.status p::before {
+    content: '•';
+    font-size: 2em;
+    height: 1em;
+    display: flex;
+    align-items: center;
+}
+
+.status .pendiente {
+    background-color: #FFA500; /* Orange for pending */
+}
+
+.status .aprobado {
+    background-color: #28a745; /* Green for approved */
+}
+
+.status .en-curso {
+    background-color: #007bff; /* Blue for in progress */
+}
+
+.status .cancelado {
+    background-color: #dc3545; /* Red for canceled */
+}
+
+.status p {
+    color: #fff;
+    background-color: #2FA56D;
+    font-size: .8em;
+    display: flex;
+    padding: 2px 6px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 5px;
+}
+
+.status p::before {
+    content: '•';
+    font-size: 2em;
+    height: 1em;
+    display: flex;
+    align-items: center;
+}
+
+.email {
+    font-size: .8em;
+    color: #393295;
+}
+
+/* Prestamo Table Fin */

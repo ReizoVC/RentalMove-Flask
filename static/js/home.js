@@ -6,8 +6,10 @@ const btnCerrarRegistro = document.getElementById('close-register');
 const btnAbrirRegistro2 = document.getElementById('form-register-btn');
 
 // llamando accionadores del login
-const btnAbrirLogin = document.getElementById('form-login-btn');
+const btnAbrirLogin = document.getElementById('header-Login');
 const btnCerrarLogin = document.getElementById('close-login');
+
+const btnAbrirLogin2 = document.getElementById('form-login-btn');
 
 // llamando modales
 const modalRegister = document.getElementById('signinDialog');
@@ -30,11 +32,15 @@ btnAbrirRegistro2.addEventListener('click', () => {
 //abrir y cerrar modal de login
 btnAbrirLogin.addEventListener('click', () => {
     modalLogin.style.display = 'flex';
-    modalRegister.style.display = 'none';
 });
 
 btnCerrarLogin.addEventListener('click', () => {
     modalLogin.style.display = 'none';
+});
+
+btnAbrirLogin2.addEventListener('click', () => {
+    modalLogin.style.display = 'flex';
+    modalRegister.style.display = 'none';
 });
 
 

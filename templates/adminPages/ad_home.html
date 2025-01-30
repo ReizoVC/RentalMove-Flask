@@ -30,31 +30,33 @@
             </div>
         </div>
         <div class="loans">
-            <h2>Prestamos</h2>
-            <table>
+            <div>
+                <h2>Lista de reservas</h2>            
+            </div>
+            <table class="prestamos-adm">
                 <thead>
-                    <tr>
+                    <tr class="admin-prestamo-header">
                         <th>ID</th>
-                        <th>Usuario</th>
-                        <th>Auto</th>
-                        <th>Fecha Inicio</th>
-                        <th>Fecha Fin</th>
+                        <th class="name-prestamo"><img src="{{url_for('static', filename='svg/reserva/usuario.svg')}}" alt=""> Cliente</th>
+                        <th class="car-prestamo">Auto</th>
+                        <th><img src="{{url_for('static', filename='svg/reserva/calendario.svg')}}" alt="">F. Inicio</th>
+                        <th><img src="{{url_for('static', filename='svg/reserva/calendario.svg')}}" alt="">F. Fin</th>
+                        <th><img src="{{url_for('static', filename='svg/reserva/status.svg')}}" alt="">Status</th>
                         <th>Precio Total</th>
-                        <th>Status</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="admin-prestamo-row">
                     {% for prestamo in prestamos %}
                     <tr>
-                        <td>{{ prestamo.Prestamo.id }}</td>
-                        <td>{{ prestamo.Usuario.nombre }} {{ prestamo.Usuario.apellido }}</td>
-                        <td>{{ prestamo.Auto.marca }} {{ prestamo.Auto.modelo }}</td>
-                        <td>{{ prestamo.Prestamo.fecha_inicio }}</td>
-                        <td>{{ prestamo.Prestamo.fecha_fin }}</td>
+                        <td>🟪{{ prestamo.Prestamo.id }}</td>
+                        <td class="name-prestamo">{{ prestamo.Usuario.nombre }} {{ prestamo.Usuario.apellido }} <span class="email"><br>{{ prestamo.Usuario.correo }}</span></td>
+                        <td class="car-prestamo">{{ prestamo.Auto.marca }} {{ prestamo.Auto.modelo }}</td>
+                        <td>{{ prestamo.Prestamo.fecha_inicio.strftime('%b %d, %Y') }}</td>
+                        <td>{{ prestamo.Prestamo.fecha_fin.strftime('%b %d, %Y') }}</td>
+                        <td class="status"><p class="{{ prestamo.Prestamo.status|lower }}">{{ prestamo.Prestamo.status }}</p></td>
                         <td>${{ prestamo.Prestamo.precio_total }}</td>
-                        <td>{{ prestamo.Prestamo.status }}</td>
-                        <td>
+                        <td class="actions">
                             {% if prestamo.Prestamo.status == 'pendiente' %}
                             <form action="{{ url_for('admn.aprobar_prestamo', prestamo_id=prestamo.Prestamo.id) }}" method="POST">
                                 <button type="submit">Aprobar</button>
