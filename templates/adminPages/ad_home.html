@@ -1,72 +1,283 @@
 {% extends "ad_layout.html" %}
 
+{% block other %}<link rel="stylesheet" href="{{ url_for('static', filename='css/reports.css') }}">{% endblock  %}
 {% block titulo %}Admin{% endblock %}
 
 {% block body %}
     <main>
-        <div class="analytics">
-            <div class="analytics-container"> 
-                <div class="analytics-card" onclick="window.location.href='/admin/vehiculos'" cursor="pointer">
-                    <div class="analytics-card-up">
-                        <img src="{{url_for('static', filename='svg/ad_svg/car.svg')}}" alt="Vehículos" class="analytics-icon">
-                        <h2>Vehículos</h2>
-                    </div>
-                    <p>{{ vehicle_count }}</p>
+        <div class="reportsNav">
+            <div class="reportDisplayBtn" id="informeReservaDisplay">
+                <div class="svgCont">
+                    <svg class="reportDisplaySvg" xmlns="http://www.w3.org/2000/svg" width="14" height="16"
+                        viewBox="0 0 14 16" fill="#FDB52A">
+                        <path
+                            d="M0.0180664 13.9869C0.0180664 11.5361 2.00484 9.54932 4.45566 9.54932H9.36004C11.8109 9.54932 13.7976 11.5361 13.7976 13.9869V13.9869C13.7976 14.8038 13.1354 15.4661 12.3184 15.4661H1.49726C0.680324 15.4661 0.0180664 14.8038 0.0180664 13.9869V13.9869Z" />
+                        <path
+                            d="M6.91026 8.42225C9.07874 8.42225 10.8366 6.65623 10.8366 4.47773C10.8366 2.29923 9.07874 0.533203 6.91026 0.533203C4.74178 0.533203 2.98389 2.29923 2.98389 4.47773C2.98389 6.65623 4.74178 8.42225 6.91026 8.42225Z" />
+                    </svg>
                 </div>
-                <div class="analytics-card" onclick="window.location.href='/admin/usuarios'" cursor="pointer">
-                    <div class="analytics-card-up">
-                        <img src="{{url_for('static', filename='svg/ad_svg/user.svg')}}" alt="Usuarios" class="analytics-icon">
-                        <h2>Usuarios</h2>
-                    </div>
-                    <p>{{ user_count }}</p>
+                <p>Informe<br> de reservas</p>
+                <svg id="reportDisplayDots" class="reportDisplayDots" xmlns="http://www.w3.org/2000/svg" width="19"
+                    height="31" viewBox="0 0 19 31" fill="#695858">
+                    <path
+                        d="M10 15.5C10 14.6716 9.32843 14 8.5 14C7.67157 14 7 14.6716 7 15.5C7 16.3284 7.67157 17 8.5 17C9.32843 17 10 16.3284 10 15.5Z" />
+                    <path
+                        d="M10 8.5C10 7.67157 9.32843 7 8.5 7C7.67157 7 7 7.67157 7 8.5C7 9.32843 7.67157 10 8.5 10C9.32843 10 10 9.32843 10 8.5Z" />
+                    <path
+                        d="M10 22.5C10 21.6716 9.32843 21 8.5 21C7.67157 21 7 21.6716 7 22.5C7 23.3284 7.67157 24 8.5 24C9.32843 24 10 23.3284 10 22.5Z" />
+                </svg>
+            </div>
+            <div class="reportDisplayBtn" id="ingresoMensualDisplay">
+                <div class="svgCont">
+                    <svg class="reportDisplaySvg" xmlns="http://www.w3.org/2000/svg" width="15" height="14"
+                        viewBox="0 0 15 14" fill="#CB3CFF">
+                        <path
+                            d="M4.33558 6.47976C4.84534 6.47976 5.31264 6.243 5.69066 5.87923C5.29416 5.16823 5.06783 4.36385 5.06783 3.592C5.06783 2.93743 5.22573 2.31999 5.50367 1.77479C5.15895 1.56341 4.75605 1.43951 4.32387 1.43951C3.06065 1.43951 2.03674 2.47826 2.03674 3.75946C2.03674 5.04084 3.07236 6.47976 4.33558 6.47976Z" />
+                        <path
+                            d="M5.8738 7.58C5.65058 7.53184 5.41949 7.50519 5.18199 7.50519H3.4811C1.67116 7.50519 0.203735 8.97719 0.203735 10.7931L0.21142 11.1819C0.21142 11.6892 0.621457 12.1006 1.12719 12.1006H2.80429C2.88663 10.0803 4.12479 8.35791 5.8738 7.58Z" />
+                        <path
+                            d="M9.01602 6.96472C10.5822 6.96472 11.8376 5.18041 11.8376 3.59169C11.8376 2.00297 10.5678 0.714966 9.00157 0.714966C7.43534 0.714966 6.16553 2.00297 6.16553 3.59169C6.16571 5.18041 7.4498 6.96472 9.01602 6.96472Z" />
+                        <path
+                            d="M14.1296 12.3137C14.1296 10.0619 12.3101 8.23663 10.0658 8.23663H7.95672C5.7124 8.23663 3.89294 10.0619 3.89294 12.3137L3.90264 12.7958C3.90264 13.4248 4.41093 13.9349 5.03816 13.9349H13.004C13.631 13.9349 14.1395 13.4248 14.1395 12.7958L14.1296 12.3137Z" />
+                    </svg>
                 </div>
-                <div class="analytics-card" onclick="window.location.href='/admin/personal'">
-                    <div class="analytics-card-up">
-                        <img src="{{url_for('static', filename='svg/ad_svg/personal.svg')}}" alt="Personal" class="analytics-icon">
-                        <h2>Personal</h2>
-                    </div>
-                    <p>{{ personal_count }}</p>
+                <p>Ingresos<br> mensuales</p>
+                <svg id="reportDisplayDots" class="reportDisplayDots" xmlns="http://www.w3.org/2000/svg" width="19"
+                    height="31" viewBox="0 0 19 31" fill="#695858">
+                    <path
+                        d="M10 15.5C10 14.6716 9.32843 14 8.5 14C7.67157 14 7 14.6716 7 15.5C7 16.3284 7.67157 17 8.5 17C9.32843 17 10 16.3284 10 15.5Z" />
+                    <path
+                        d="M10 8.5C10 7.67157 9.32843 7 8.5 7C7.67157 7 7 7.67157 7 8.5C7 9.32843 7.67157 10 8.5 10C9.32843 10 10 9.32843 10 8.5Z" />
+                    <path
+                        d="M10 22.5C10 21.6716 9.32843 21 8.5 21C7.67157 21 7 21.6716 7 22.5C7 23.3284 7.67157 24 8.5 24C9.32843 24 10 23.3284 10 22.5Z" />
+                </svg>
+            </div>
+            <div class="reportDisplayBtn" id="gestionAutosDisplay">
+                <div class="svgCont">
+                    <svg class="reportDisplaySvg" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                        viewBox="0 0 17 17" fill="#086CD9">
+                        <path
+                            d="M8.61992 0.224609C7.04496 0.224609 5.50536 0.693801 4.19582 1.57285C2.88628 2.4519 1.86562 3.70133 1.2629 5.16314C0.660189 6.62495 0.502491 8.23348 0.809752 9.78533C1.11701 11.3372 1.87543 12.7626 2.9891 13.8815C4.10278 15.0003 5.52168 15.7622 7.06638 16.0709C8.61109 16.3796 10.2122 16.2211 11.6673 15.6156C13.1224 15.0101 14.3661 13.9848 15.2411 12.6692C16.1161 11.3536 16.5831 9.80686 16.5831 8.22461C16.5791 6.10413 15.7388 4.07166 14.2463 2.57225C12.7538 1.07284 10.7306 0.228676 8.61992 0.224609ZM4.94461 9.14768C4.76288 9.14768 4.58524 9.09355 4.43414 8.99212C4.28304 8.89069 4.16527 8.74652 4.09572 8.57785C4.02618 8.40918 4.00798 8.22358 4.04344 8.04452C4.07889 7.86546 4.1664 7.70099 4.2949 7.57189C4.4234 7.4428 4.58712 7.35488 4.76535 7.31927C4.94359 7.28365 5.12834 7.30193 5.29623 7.3718C5.46412 7.44166 5.60763 7.55997 5.70859 7.71177C5.80955 7.86357 5.86344 8.04204 5.86344 8.22461C5.86344 8.46942 5.76663 8.70421 5.59432 8.87732C5.42201 9.05043 5.1883 9.14768 4.94461 9.14768ZM8.61992 9.14768C8.4382 9.14768 8.26055 9.09355 8.10945 8.99212C7.95835 8.89069 7.84058 8.74652 7.77104 8.57785C7.70149 8.40918 7.6833 8.22358 7.71875 8.04452C7.7542 7.86546 7.84171 7.70099 7.97021 7.57189C8.09871 7.4428 8.26243 7.35488 8.44067 7.31927C8.61891 7.28365 8.80365 7.30193 8.97154 7.3718C9.13944 7.44166 9.28294 7.55997 9.3839 7.71177C9.48486 7.86357 9.53875 8.04204 9.53875 8.22461C9.53875 8.46942 9.44195 8.70421 9.26963 8.87732C9.09732 9.05043 8.86361 9.14768 8.61992 9.14768ZM12.2952 9.14768C12.1135 9.14768 11.9359 9.09355 11.7848 8.99212C11.6337 8.89069 11.5159 8.74652 11.4464 8.57785C11.3768 8.40918 11.3586 8.22358 11.3941 8.04452C11.4295 7.86546 11.517 7.70099 11.6455 7.57189C11.774 7.4428 11.9377 7.35488 12.116 7.31927C12.2942 7.28365 12.479 7.30193 12.6469 7.3718C12.8148 7.44166 12.9583 7.55997 13.0592 7.71177C13.1602 7.86357 13.2141 8.04204 13.2141 8.22461C13.2141 8.46942 13.1173 8.70421 12.9449 8.87732C12.7726 9.05043 12.5389 9.14768 12.2952 9.14768Z" />
+                    </svg>
                 </div>
+                <p>Gestion<br> de autos</p>
+                <svg id="reportDisplayDots" class="reportDisplayDots" xmlns="http://www.w3.org/2000/svg" width="19"
+                    height="31" viewBox="0 0 19 31" fill="#695858">
+                    <path
+                        d="M10 15.5C10 14.6716 9.32843 14 8.5 14C7.67157 14 7 14.6716 7 15.5C7 16.3284 7.67157 17 8.5 17C9.32843 17 10 16.3284 10 15.5Z" />
+                    <path
+                        d="M10 8.5C10 7.67157 9.32843 7 8.5 7C7.67157 7 7 7.67157 7 8.5C7 9.32843 7.67157 10 8.5 10C9.32843 10 10 9.32843 10 8.5Z" />
+                    <path
+                        d="M10 22.5C10 21.6716 9.32843 21 8.5 21C7.67157 21 7 21.6716 7 22.5C7 23.3284 7.67157 24 8.5 24C9.32843 24 10 23.3284 10 22.5Z" />
+                </svg>
+            </div>
+            <div class="reportDisplayBtn" id="informeResenasDisplay">
+                <div class="svgCont">
+                    <svg class="reportDisplaySvg" xmlns="http://www.w3.org/2000/svg" width="16" height="17"
+                        viewBox="0 0 16 17" fill="#05C168">
+                        <path
+                            d="M11.5292 1.03809C10.8424 1.03809 10.1651 1.19873 9.55077 1.5073C8.93647 1.81587 8.40212 2.26388 7.99004 2.81586C7.43293 2.06961 6.65622 1.51838 5.76994 1.24025C4.88365 0.962114 3.93273 0.971179 3.05186 1.26616C2.17099 1.56114 1.40483 2.12708 0.861918 2.88382C0.319004 3.64055 0.0268555 4.54972 0.0268555 5.48253C0.0268555 10.8085 7.3928 15.0085 7.70248 15.1862C7.79023 15.2358 7.88939 15.2613 7.99004 15.2603C8.09078 15.262 8.19012 15.2364 8.2776 15.1862C9.63407 14.3896 10.9064 13.4564 12.0749 12.401C14.6481 10.0751 15.9532 7.7492 15.9532 5.48253C15.9532 4.30379 15.4871 3.17333 14.6575 2.33983C13.8278 1.50634 12.7025 1.03809 11.5292 1.03809Z" />
+                    </svg>
+                </div>
+                <p>Informe<br> de reseñas</p>
+                <svg id="reportDisplayDots" class="reportDisplayDots" xmlns="http://www.w3.org/2000/svg" width="19"
+                    height="31" viewBox="0 0 19 31" fill="#695858">
+                    <path
+                        d="M10 15.5C10 14.6716 9.32843 14 8.5 14C7.67157 14 7 14.6716 7 15.5C7 16.3284 7.67157 17 8.5 17C9.32843 17 10 16.3284 10 15.5Z" />
+                    <path
+                        d="M10 8.5C10 7.67157 9.32843 7 8.5 7C7.67157 7 7 7.67157 7 8.5C7 9.32843 7.67157 10 8.5 10C9.32843 10 10 9.32843 10 8.5Z" />
+                    <path
+                        d="M10 22.5C10 21.6716 9.32843 21 8.5 21C7.67157 21 7 21.6716 7 22.5C7 23.3284 7.67157 24 8.5 24C9.32843 24 10 23.3284 10 22.5Z" />
+                </svg>
             </div>
         </div>
-        <div class="loans">
-            <div>
-                <h2>Lista de reservas</h2>            
+        <!-- Informe de Reservas -->
+        <div class="infReservas" id="infReservas">
+            <div class="loans">
+                <div>
+                    <h2>Lista de reservas</h2>            
+                </div>
+                <table class="prestamos-adm">
+                    <thead>
+                        <tr class="admin-prestamo-header">
+                            <th>ID</th>
+                            <th class="name-prestamo"><img src="{{url_for('static', filename='svg/reserva/usuario.svg')}}" alt=""> Cliente</th>
+                            <th class="car-prestamo">Auto</th>
+                            <th><img src="{{url_for('static', filename='svg/reserva/calendario.svg')}}" alt="">F. Inicio</th>
+                            <th><img src="{{url_for('static', filename='svg/reserva/calendario.svg')}}" alt="">F. Fin</th>
+                            <th><img src="{{url_for('static', filename='svg/reserva/status.svg')}}" alt="">Status</th>
+                            <th>Precio Total</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="admin-prestamo-row">
+                        {% for prestamo in prestamos %}
+                        <tr>
+                            <td>🟪#{{ prestamo.Prestamo.id }}</td>
+                            <td class="name-prestamo">{{ prestamo.Usuario.nombre }} {{ prestamo.Usuario.apellido }} <span class="email"><br>{{ prestamo.Usuario.correo }}</span></td>
+                            <td class="car-prestamo">{{ prestamo.Auto.marca }} {{ prestamo.Auto.modelo }}</td>
+                            <td>{{ prestamo.Prestamo.fecha_inicio.strftime('%b %d, %Y') }}</td>
+                            <td>{{ prestamo.Prestamo.fecha_fin.strftime('%b %d, %Y') }}</td>
+                            <td class="status"><p class="{{ prestamo.Prestamo.status|lower }}">{{ prestamo.Prestamo.status }}</p></td>
+                            <td>${{ prestamo.Prestamo.precio_total }}</td>
+                            <td class="actions">
+                                {% if prestamo.Prestamo.status == 'pendiente' %}
+                                <form action="{{ url_for('admn.aprobar_prestamo', prestamo_id=prestamo.Prestamo.id) }}" method="POST">
+                                    <button type="submit">Aprobar</button>
+                                </form>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
-            <table class="prestamos-adm">
-                <thead>
-                    <tr class="admin-prestamo-header">
-                        <th>ID</th>
-                        <th class="name-prestamo"><img src="{{url_for('static', filename='svg/reserva/usuario.svg')}}" alt=""> Cliente</th>
-                        <th class="car-prestamo">Auto</th>
-                        <th><img src="{{url_for('static', filename='svg/reserva/calendario.svg')}}" alt="">F. Inicio</th>
-                        <th><img src="{{url_for('static', filename='svg/reserva/calendario.svg')}}" alt="">F. Fin</th>
-                        <th><img src="{{url_for('static', filename='svg/reserva/status.svg')}}" alt="">Status</th>
-                        <th>Precio Total</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody class="admin-prestamo-row">
-                    {% for prestamo in prestamos %}
-                    <tr>
-                        <td>🟪#{{ prestamo.Prestamo.id }}</td>
-                        <td class="name-prestamo">{{ prestamo.Usuario.nombre }} {{ prestamo.Usuario.apellido }} <span class="email"><br>{{ prestamo.Usuario.correo }}</span></td>
-                        <td class="car-prestamo">{{ prestamo.Auto.marca }} {{ prestamo.Auto.modelo }}</td>
-                        <td>{{ prestamo.Prestamo.fecha_inicio.strftime('%b %d, %Y') }}</td>
-                        <td>{{ prestamo.Prestamo.fecha_fin.strftime('%b %d, %Y') }}</td>
-                        <td class="status"><p class="{{ prestamo.Prestamo.status|lower }}">{{ prestamo.Prestamo.status }}</p></td>
-                        <td>${{ prestamo.Prestamo.precio_total }}</td>
-                        <td class="actions">
-                            {% if prestamo.Prestamo.status == 'pendiente' %}
-                            <form action="{{ url_for('admn.aprobar_prestamo', prestamo_id=prestamo.Prestamo.id) }}" method="POST">
-                                <button type="submit">Aprobar</button>
-                            </form>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
         </div>
+        <!-- Ingresos Mensuales -->
+        <div class="ingMensuales" id="ingMensuales">
+            <div class="incomeContainer">
+                <div class="incomeStatus incomeStatusDia">
+                    <div class="dailyIncomeHead">
+                        <h3>Web Visitors</h3>
+                        <button>
+                            Export
+                            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="auto" viewBox="0 0 10 12" fill="none">
+                                <path d="M5.11426 0.928711V10.9287" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M1.02246 6.83691L5.11337 10.9278L9.20428 6.83691" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="daygraphic" class="roundGrahic"></div>
+                    <div class="propiedades">
+                        <p>Economicos<span>80%</span></p>
+                        <p>Lujosos <span>70%</span></p>
+                        <p>Exentricos <span>50%</span></p>
+                    </div>
+                </div>
+                <div class="incomeStatus incomeStatusSemana">
+                    <p>Complete Task Over Time</p>
+                    <div class="wekIncomeHead">
+                        <h2>250</h2>
+                        <span class="comparisonPersentage">16.8%</span>
+                        <input type="date" name="" id="">
+                    </div>
+                    <div id="weekGraphic" class="areaGraphic"></div>
+                </div>
+                <div class="incomeStatus incomeStatusMes">
+                    <div id="monthGraphic" style="height: 100%"></div>
+                </div>
+                <div class="incomeStatus incomeStatusPopulares">populares</div>
+            </div>
+        </div>
+        <!-- Gestion de Autos -->
+        <div class="gestionAutos" id="gestionAutos">
+            <div class="carStatus">
+                <div class="cardStatus">
+                    <div class="status-top">
+                        <p><a href=""><img src="{{url_for('static', filename='svg/ad_home/gest-autos/view.svg')}}" alt=""></a>En uso</p>
+                        <img src="{{url_for('static', filename='svg/ad_home/gest-autos/displayBtn.svg')}}" alt="displaySvg" class="status_displayBtn">
+                    </div>
+                    <p class="carTypeNmbr">12</p>
+                </div>
+                <div class="cardStatus">
+                    <div class="status-top">
+                        <p><a href=""><img src="{{url_for('static', filename='svg/ad_home/gest-autos/view.svg')}}" alt=""></a>Reservado</p>
+                        <img src="{{url_for('static', filename='svg/ad_home/gest-autos/displayBtn.svg')}}" alt="displaySvg" class="status_displayBtn">
+                    </div>
+                    <p class="carTypeNmbr">5</p>
+                </div>
+                <div class="cardStatus">
+                    <div class="status-top">
+                        <p><a href=""><img src="{{url_for('static', filename='svg/ad_home/gest-autos/view.svg')}}" alt=""></a>Disponible</p>
+                        <img src="{{url_for('static', filename='svg/ad_home/gest-autos/displayBtn.svg')}}" alt="displaySvg" class="status_displayBtn">
+                    </div>
+                    <p class="carTypeNmbr">20</p>
+                </div>
+                <div class="cardStatus">
+                    <div class="status-top">
+                        <p><a href=""><img src="{{url_for('static', filename='svg/ad_home/gest-autos/view.svg')}}" alt=""></a>En mantenimiento</p>
+                        <img src="{{url_for('static', filename='svg/ad_home/gest-autos/displayBtn.svg')}}" alt="displaySvg" class="status_displayBtn">
+                    </div>
+                    <p class="carTypeNmbr">3</p>
+                </div>
+            </div>
+            <div class="status-loans">
+                <div class="status-loans-header">
+                    <h2>Todos los Vehiculos</h2>
+                    <p><span>1 - 10</span> de 250</p>
+                </div>
+                <hr>
+                <table class="status-adm">
+                    <thead>
+                        <tr class="admin-status-header">
+                            <th class="name-producto">
+                                <input type="checkbox" name="" id="" class="status-selector">
+                                <img src="{{url_for('static', filename='svg/ad_home/gest-autos/table-header/producto.svg')}}" alt="">
+                                Producto
+                            </th>
+                            <th><img src="{{url_for('static', filename='svg/ad_home/gest-autos/table-header/categoria.svg')}}" alt=""> Categoria</th>
+                            <th><img src="{{url_for('static', filename='svg/ad_home/gest-autos/table-header/precio.svg')}}" alt=""> Precio</th>
+                            <th><img src="{{url_for('static', filename='svg/ad_home/gest-autos/table-header/status.svg')}}" alt=""> Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="admin-status-row">
+                        <tr class="sr-color1">
+                            <td><input type="checkbox" name="" id="" class="status-selector"><img
+                                    src="{{url_for('static', filename='svg/ad_home/gest-autos/auto.svg')}}" class="icono_svg" alt=""> Toyotta Corolla X5</td>
+                            <td class="car-prestamo">Economico</td>
+                            <td>$ 50/dia</td>
+                            <td class="status-type status-type-stock">En Stock</td>
+                            <td class="actions">
+                                <a href=""><img src="{{url_for('static', filename='svg/ad_home/gest-autos/botones/editar.svg')}}" alt=""></a>
+                                <a href=""><img src="{{url_for('static', filename='svg/ad_home/gest-autos/botones/borrar.svg')}}" alt=""></a>
+                            </td>
+                        </tr>
+                        <tr class="sr-color2">
+                            <td><input type="checkbox" name="" id="" class="status-selector"><img
+                                    src="{{url_for('static', filename='svg/ad_home/gest-autos/auto.svg')}}" class="icono_svg" alt=""> Masserati B500F</td>
+                            <td class="car-prestamo">Caro</td>
+                            <td>$ 670/dia</td>
+                            <td class="status-type status-type-outStock">Sin Stock </td>
+                            <td class="actions">
+                                <a href=""><img src="{{url_for('static', filename='svg/ad_home/gest-autos/botones/editar.svg')}}" alt=""></a>
+                                <a href=""><img src="{{url_for('static', filename='svg/ad_home/gest-autos/botones/borrar.svg')}}" alt=""></a>
+                            </td>
+                        </tr>
+                        <tr class="sr-color1">
+                            <td><input type="checkbox" name="" id="" class="status-selector"><img
+                                    src="{{url_for('static', filename='svg/ad_home/gest-autos/auto.svg')}}" class="icono_svg" alt=""> Toyotta Corolla X5</td>
+                            <td class="car-prestamo">Economico</td>
+                            <td>$ 50/dia</td>
+                            <td class="status-type status-type-stock">En Stock</td>
+                            <td class="actions">
+                                <a href=""><img src="{{url_for('static', filename='svg/ad_home/gest-autos/botones/editar.svg')}}" alt=""></a>
+                                <a href=""><img src="{{url_for('static', filename='svg/ad_home/gest-autos/botones/borrar.svg')}}" alt=""></a>
+                            </td>
+                        </tr>
+                        <tr class="sr-color2">
+                            <td><input type="checkbox" name="" id="" class="status-selector"><img
+                                    src="{{url_for('static', filename='svg/ad_home/gest-autos/auto.svg')}}" class="icono_svg" alt=""> Masserati B500F</td>
+                            <td class="car-prestamo">Caro</td>
+                            <td>$ 670/dia</td>
+                            <td class="status-type status-type-outStock">Sin Stock</td>
+                            <td class="actions">
+                                <a href=""><img src="{{url_for('static', filename='svg/ad_home/gest-autos/botones/editar.svg')}}" alt=""></a>
+                                <a href=""><img src="{{url_for('static', filename='svg/ad_home/gest-autos/botones/borrar.svg')}}" alt=""></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Informe de Reseñas -->
+        <div class="informeResena" id="informeResena">
+            <h4>Informe Reseñas</h4>
+        </div>
+        <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js"></script>
+        <script src="{{ url_for('static', filename='js/admn_gestAut/displays.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/admn_gestAut/graficoDaily.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/admn_gestAut/graficoWeek.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/admn_gestAut/graficoMonth.js') }}"></script>
     </main>
 {% endblock %}

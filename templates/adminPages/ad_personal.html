@@ -1,5 +1,5 @@
 {% extends "ad_layout.html" %}
-
+{% block css %}{{ url_for('static', filename='css/admin.css') }}{% endblock %}
 {% block titulo %}Admin Personal{% endblock %}
 
 {% block body %}
