@@ -21,23 +21,25 @@
     </div>
     <div class="cards-container-catalgo">
         {% for auto in autos %}
-    <div class="card-catalogo">
-        <img class="card_img-catalogo" src="{{ url_for('static', filename=auto.imagen.replace('static/', '').replace('\\', '/')) }}" alt="{{ auto.modelo }}">
-        <div class="card_info-catalogo">
-            <div class="card_info-catalogo_top">
-                <img src="{{ url_for('static', filename=('images/logosmarca/' ~ auto.marca ~ 'logo.webp')|lower) }}" alt="{{ auto.marca }}" class="card_marca-logo_catalogo">
-                <div>
-                    <h2>{{ auto.marca }} {{ auto.modelo }}</h2>
-                    <p>{{ auto.transmision }} <span>• {{ auto.traccion }}</span></p>
+            {% if auto.disponibilidad %}
+            <div class="card-catalogo">
+                <img class="card_img-catalogo" src="{{ url_for('static', filename=auto.imagen.replace('static/', '').replace('\\', '/')) }}" alt="{{ auto.modelo }}">
+                <div class="card_info-catalogo">
+                    <div class="card_info-catalogo_top">
+                        <img src="{{ url_for('static', filename=('images/logosmarca/' ~ auto.marca ~ 'logo.webp')|lower) }}" alt="{{ auto.marca }}" class="card_marca-logo_catalogo">
+                        <div>
+                            <h2>{{ auto.marca }} {{ auto.modelo }}</h2>
+                            <p>{{ auto.transmision }} <span>• {{ auto.traccion }}</span></p>
+                        </div>
+                    </div>
+                    <div class="card_info-catalogo_bottom">
+                        <a href="{{ url_for('inicio.alquilar_auto', auto_id=auto.id) }}" class="btn-alquilar_card-catalogo">Alquilar</a>
+                        <h2>${{ auto.precio_dia }}<span class="spanDia-catalogo">/dia</span></h2>
+                    </div>
                 </div>
             </div>
-            <div class="card_info-catalogo_bottom">
-                <a href="{{ url_for('inicio.alquilar_auto', auto_id=auto.id) }}" class="btn-alquilar_card-catalogo">Alquilar</a>
-                <h2>${{ auto.precio_dia }}<span class="spanDia-catalogo">/dia</span></h2>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
+            {% endif %}
+        {% endfor %}
     </div>
 </main>
 

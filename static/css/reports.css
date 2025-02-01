@@ -367,6 +367,20 @@ nav ul li a {
   background-color: #343B4F;
 }
 
+.addBtnCont{
+  border: none;
+  border-radius: 4px;
+  height: 22px;
+  width: 22px;
+  background-color: #fff;
+  color: #000;
+}
+
+.addBtn{
+  background-color: transparent;
+  height: 12px !important;
+}
+
 .status-loans-header {
   padding: 20px 50px;
   display: flex;
@@ -400,7 +414,7 @@ nav ul li a {
 
 /* Producto */
 .admin-status-header th:first-child, .admin-status-row td:first-child {
-  grid-column: 1/6;
+  grid-column: 1/7;
 }
 
 /* categoria */

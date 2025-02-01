@@ -21,7 +21,8 @@ def admin():
     user_count = get_user_count()
     personal_count = get_personal_count()
     prestamos = db.session.query(Prestamo, Usuario, Auto).join(Usuario, Prestamo.usuario_id == Usuario.id).join(Auto, Prestamo.auto_id == Auto.id).all()
-    return render_template('adminPages/ad_home.html', vehicle_count=vehicle_count, user_count=user_count, personal_count=personal_count, prestamos=prestamos)
+    autos = Auto.query.all()
+    return render_template('adminPages/ad_home.html', vehicle_count=vehicle_count, user_count=user_count, personal_count=personal_count, prestamos=prestamos, autos=autos)
 
 
 @admn.route('/admin/vehiculos')
@@ -223,7 +224,15 @@ def actualizar_auto():
     flash('Auto actualizado exitosamente')
     return redirect('/admin/vehiculos')
 
-
+@admn.route('/admin/vehiculos/agregar_stock/<int:auto_id>', methods=['POST'])
+@admin_required
+def agregar_stock(auto_id):
+    auto = Auto.query.get_or_404(auto_id)
+    auto.stock += 1
+    auto.disponibilidad = True
+    db.session.commit()
+    flash('Stock del auto incrementado exitosamente')
+    return redirect(url_for('admn.admin'))
 
 #Eliminando
 

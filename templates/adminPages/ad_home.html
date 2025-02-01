@@ -205,7 +205,7 @@
             <div class="status-loans">
                 <div class="status-loans-header">
                     <h2>Todos los Vehiculos</h2>
-                    <p><span>1 - 10</span> de 250</p>
+                    <p><span>1 - 10</span> de 10</p>
                 </div>
                 <hr>
                 <table class="status-adm">
@@ -223,50 +223,25 @@
                         </tr>
                     </thead>
                     <tbody class="admin-status-row">
-                        <tr class="sr-color1">
-                            <td><input type="checkbox" name="" id="" class="status-selector"><img
-                                    src="{{url_for('static', filename='svg/ad_home/gest-autos/auto.svg')}}" class="icono_svg" alt=""> Toyotta Corolla X5</td>
-                            <td class="car-prestamo">Economico</td>
-                            <td>$ 50/dia</td>
-                            <td class="status-type status-type-stock">En Stock</td>
+                        {% for auto in autos %}
+                        <tr class="{{ loop.cycle('sr-color1', 'sr-color2') }}">
+                            <td>
+                                <input type="checkbox" name="" id="" class="status-selector">
+                                <img src="{{ url_for('static', filename='svg/ad_home/gest-autos/auto.svg') }}" class="icono_svg" alt="">
+                                {{ auto.marca }} {{ auto.modelo }}
+                            </td>
+                            <td class="car-prestamo">{{ auto.categoria }}</td>
+                            <td>$ {{ auto.precio_dia }}/dia</td>
+                            <td class="status-type {{ 'status-type-stock' if auto.disponibilidad else 'status-type-outStock' }}">
+                                {{ 'En Stock' if auto.disponibilidad else 'Sin Stock' }}
+                            </td>
                             <td class="actions">
-                                <a href=""><img src="{{url_for('static', filename='svg/ad_home/gest-autos/botones/editar.svg')}}" alt=""></a>
-                                <a href=""><img src="{{url_for('static', filename='svg/ad_home/gest-autos/botones/borrar.svg')}}" alt=""></a>
+                                <form action="{{ url_for('admn.agregar_stock', auto_id=auto.id) }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="addBtnCont" >+</button>
+                                </form>
                             </td>
                         </tr>
-                        <tr class="sr-color2">
-                            <td><input type="checkbox" name="" id="" class="status-selector"><img
-                                    src="{{url_for('static', filename='svg/ad_home/gest-autos/auto.svg')}}" class="icono_svg" alt=""> Masserati B500F</td>
-                            <td class="car-prestamo">Caro</td>
-                            <td>$ 670/dia</td>
-                            <td class="status-type status-type-outStock">Sin Stock </td>
-                            <td class="actions">
-                                <a href=""><img src="{{url_for('static', filename='svg/ad_home/gest-autos/botones/editar.svg')}}" alt=""></a>
-                                <a href=""><img src="{{url_for('static', filename='svg/ad_home/gest-autos/botones/borrar.svg')}}" alt=""></a>
-                            </td>
-                        </tr>
-                        <tr class="sr-color1">
-                            <td><input type="checkbox" name="" id="" class="status-selector"><img
-                                    src="{{url_for('static', filename='svg/ad_home/gest-autos/auto.svg')}}" class="icono_svg" alt=""> Toyotta Corolla X5</td>
-                            <td class="car-prestamo">Economico</td>
-                            <td>$ 50/dia</td>
-                            <td class="status-type status-type-stock">En Stock</td>
-                            <td class="actions">
-                                <a href=""><img src="{{url_for('static', filename='svg/ad_home/gest-autos/botones/editar.svg')}}" alt=""></a>
-                                <a href=""><img src="{{url_for('static', filename='svg/ad_home/gest-autos/botones/borrar.svg')}}" alt=""></a>
-                            </td>
-                        </tr>
-                        <tr class="sr-color2">
-                            <td><input type="checkbox" name="" id="" class="status-selector"><img
-                                    src="{{url_for('static', filename='svg/ad_home/gest-autos/auto.svg')}}" class="icono_svg" alt=""> Masserati B500F</td>
-                            <td class="car-prestamo">Caro</td>
-                            <td>$ 670/dia</td>
-                            <td class="status-type status-type-outStock">Sin Stock</td>
-                            <td class="actions">
-                                <a href=""><img src="{{url_for('static', filename='svg/ad_home/gest-autos/botones/editar.svg')}}" alt=""></a>
-                                <a href=""><img src="{{url_for('static', filename='svg/ad_home/gest-autos/botones/borrar.svg')}}" alt=""></a>
-                            </td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

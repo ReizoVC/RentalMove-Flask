@@ -75,6 +75,7 @@ def alquilar_auto(auto_id):
         dias = (datetime.strptime(fecha_fin, '%Y-%m-%d') - datetime.strptime(fecha_inicio, '%Y-%m-%d')).days
         precio_total = dias * auto.precio_dia
         status = 'pendiente'  # Default status
+        fecha_prestamo = datetime.now().date()  # Fecha del día en que se realizó el préstamo
 
         # Guardar la transacción en la base de datos
         transaccion = Prestamo(
@@ -83,9 +84,16 @@ def alquilar_auto(auto_id):
             fecha_inicio=fecha_inicio,
             fecha_fin=fecha_fin,
             precio_total=precio_total,
-            status=status
+            status=status,
+            fecha_prestamo=fecha_prestamo
         )
         db.session.add(transaccion)
+
+        # Reducir el stock del auto
+        auto.stock -= 1
+        if auto.stock == 0:
+            auto.disponibilidad = False
+
         db.session.commit()
 
         flash('Transacción completada exitosamente')
