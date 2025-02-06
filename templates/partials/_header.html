@@ -1,16 +1,18 @@
 <header>
     <nav>
-        <div class="navigation">
-            <a href="/"><img src="{{url_for('static', filename='images/rentalLogo.png')}}" alt="" class="logo"></a>        
-            <a href="/" class="opt">Inicio</a>
-            <a href="/catalogo" class="opt">Autos</a>
-            <a href="" class="opt">Locales</a>
-            <a href="" class="opt">Contacto</a>
-        </div>
-        {% if current_user.is_authenticated %}
+        <a href="/"><img src="{{url_for('static', filename='images/rentalLogo.png')}}" alt="" class="logo"></a>
+        <img class="brg-menu" id="nav-popover" src="{{url_for('static', filename='svg/header/brg-menu2.svg')}}" alt="">
+        <div class="nav-content" id="popover-content">
+            <div class="navigation">
+                <a href="/" class="opt">Inicio</a>
+                <a href="/catalogo" class="opt">Autos</a>
+                <a href="" class="opt">Locales</a>
+                <a href="" class="opt">Contacto</a>
+            </div>
+            {% if current_user.is_authenticated %}
             <div class="loged-state">                     
                 <p><span>{{ current_user.nombre }}</span></p>
-                <div class="dropdown">
+                <div class="dropdown" id="header-popover">
                     <button class="dropbtn"><img src="{{url_for('static', filename='svg/arrow-down.svg')}}" alt=""></button>
                     <div class="dropdown-content">
                         <a href="/account" class="lgdopt" >Cuenta</a>
@@ -23,12 +25,14 @@
                 </div>
                 <img src="{{url_for('static', filename='svg/header/noti.svg')}}" alt="" class="notificationIcon">    
             </div>         
-        {% else %}
-        <div class="accountBtns">
-            <a class="account-LogIn" id="header-Login">Log In</a>
-            <a class="account-SignIn" id="header-Signin">SignIn</a>
-        </div>
-        {% endif %}
+            {% else %}
+            <div class="accountBtns">
+                <a class="account-LogIn" id="header-Login">Log In</a>
+                <a class="account-SignIn" id="header-Signin">SignIn</a>
+            </div>
+            {% endif %}
+        </div>        
+        
     </nav>
     <dialog id="signinDialog" class="signinDialog">
         <div class="container">
