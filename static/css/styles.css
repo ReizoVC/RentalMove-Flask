@@ -763,7 +763,7 @@ form button {
   margin: 0 auto;
   border-radius: 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(25rem, 2fr));
+  grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
   gap: 10px;
   justify-items: center;
   margin-bottom: 100px;
@@ -1011,3 +1011,22 @@ dialog {
 
 /* Notificaciones Fin */
 
+/* Media Queris */
+
+@media (max-width: 1200px) {
+  .footerCredits{
+    justify-self: center;
+  }
+  .cards-container-catalgo{
+    width: 90%;
+  }
+}
+
+@media (max-width: 500px) {
+  .cards-container-catalgo{
+    width: 99%;
+    margin: 0 auto;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  }
+  
+}
