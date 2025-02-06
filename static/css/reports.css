@@ -789,4 +789,84 @@ nav ul li a {
 
 /* Prestamo Table Fin */
 
-/*# sourceMappingURL=styles.css.map */
+/* Date popover */
+
+body {
+  background-color: #929292;
+}
+
+button{
+  border: none !important;
+}
+
+.btn-calendar {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  background-color: #0A1330;
+  font-family: 'Mona Sans', sans-serif;
+  color: #FFF;
+  width: fit-content;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.grid {
+  display: flex;
+  gap: 1.5em;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+calendar-date {
+  background-color: #0A1330;
+  padding: 10px;
+  border-radius: 10px;
+  font-family: 'Mona Sans', sans-serif;
+  position: absolute;
+  transform: translate(2%, 59%);
+  z-index: 1000;
+  display: none;
+  text-transform: capitalize;
+  
+}
+
+calendar-date svg {
+  height: 16px;
+  width: 16px;
+  border: none;
+}
+
+calendar-date path {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+calendar-month {
+  --color-accent: #7048e8;
+  --color-text-on-accent: #ffffff;
+  &::part(button) {        
+      border-radius: 5px;
+      border: none;
+  }
+}
+
+
+.show-calendar {
+  height: fit-content;
+  border: none;
+  cursor: pointer;
+  stroke: #FFF;
+  fill: #FFF;
+  background-color: transparent;
+  padding: 0;
+}
+
+#selected-date {
+  display: flex;
+  margin: 0;
+}
+
+
+/* date popover fin */

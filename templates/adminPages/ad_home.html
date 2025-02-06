@@ -139,13 +139,29 @@
                 <div class="incomeStatus incomeStatusDia">
                     <div class="dailyIncomeHead">
                         <h3>Ventas de Hoy</h3>
-                        <button>
-                            Export
-                            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="auto" viewBox="0 0 10 12" fill="none">
-                                <path d="M5.11426 0.928711V10.9287" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M1.02246 6.83691L5.11337 10.9278L9.20428 6.83691" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                        <div class="btn-calendar">
+                            <button class="show-calendar" id="show-calendar">
+                                <svg id="show-calendar" xmlns="http://www.w3.org/2000/svg" width="auto" height="20" viewBox="0 0 11 12" fill="fff">
+                                    <rect x="1.4375" y="1.68115" width="9.06956" height="9.12111" rx="1" />
+                                    <path
+                                        id="show-calendar"
+                                        d="M1.4375 4.72949H10.5071V9.80162C10.5071 10.3539 10.0593 10.8016 9.50706 10.8016H2.4375C1.88522 10.8016 1.4375 10.3539 1.4375 9.80162V4.72949Z"
+                                        fill="#0A1330" />
+                                    <path id="show-calendar" d="M8.48828 0.802246V2.45593" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path id="show-calendar" d="M3.52734 0.802246V2.45593" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <p id="selected-date">Ninguna</p>
+                        </div>
+                        <calendar-date id="date-popover" locale="es-ES" first-day-of-week="1" show-outside-days="true">
+                            <svg aria-label="Previous" slot="previous" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M15.75 19.5 8.25 12l7.5-7.5"></path>
                             </svg>
-                        </button>
+                            <svg aria-label="Next" slot="next" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+                            </svg>
+                            <calendar-month></calendar-month>
+                        </calendar-date>
                     </div>
                     <div id="daygraphic" class="roundGrahic"></div>
                     <div class="propiedades">
@@ -153,6 +169,7 @@
                         <p>Lujosos <span>70%</span></p>
                         <p>Exentricos <span>50%</span></p>
                     </div>
+                    <input type="hidden" id="daily-income" value="{{ daily_income }}">
                 </div>
                 <div class="incomeStatus incomeStatusSemana">
                     <p>Ingresos en la semana</p>
@@ -253,7 +270,9 @@
         <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js"></script>
         <script src="{{ url_for('static', filename='js/admn_gestAut/displays.js') }}"></script>
         <script src="{{ url_for('static', filename='js/admn_gestAut/graficoDaily.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/admn_gestAut/date.js') }}"></script>
         <script src="{{ url_for('static', filename='js/admn_gestAut/graficoWeek.js') }}"></script>
         <script src="{{ url_for('static', filename='js/admn_gestAut/graficoMonth.js') }}"></script>
+        <script type="module" src="https://unpkg.com/cally"></script>
     </main>
 {% endblock %}

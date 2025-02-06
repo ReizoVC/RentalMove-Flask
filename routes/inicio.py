@@ -15,7 +15,16 @@ def home():
 
 @inicio.route('/catalogo')
 def catalogoautos():
-    autos = Auto.query.all()
+    categoria = request.args.get('categoria')
+    transmision = request.args.get('transmision')
+    
+    if categoria:
+        autos = Auto.query.filter_by(categoria=categoria).all()
+    elif transmision:
+        autos = Auto.query.filter_by(transmision=transmision).all()
+    else:
+        autos = Auto.query.all()
+    
     return render_template('pages/catalogo.html', autos=autos)
 
 

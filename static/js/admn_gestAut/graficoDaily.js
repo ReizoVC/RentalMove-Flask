@@ -1,112 +1,109 @@
-var dom = document.getElementById("daygraphic");
-var myChart = echarts.init(dom, null, {
-    renderer: "canvas",
-    useDirtyRect: false,
+var domDaily = document.getElementById('daygraphic');
+var myChartDaily = echarts.init(domDaily, null, {
+    renderer: 'canvas',
+    useDirtyRect: false
 });
 var app = {};
 
-var option;
-
-const gaugeData = [
-    {
-        value: 80,
-        itemStyle: {
-            color: '#CB3CFF'
-        }
-    },
-    {
-        value: 0,
-        itemStyle: {
-            color: 'rgba(0, 0, 0, 0)'
-        }
-    },
-    {
-        value: 70,
-        itemStyle: {
-            color: '#0E43FB'
-        }
-    },
-    {
-        value: 0,
-        itemStyle: {
-            color: 'rgba(0, 0, 0, 0)'
-        }
-    },
-    {
-        value: 50,
-        itemStyle: {
-            color: '#00C2FF'
-        }
-    },
-];
+var valueEcon = 0;
+var valueLuj = 200;
+var valueExc = 300;
+var total = valueEcon + valueLuj + valueExc;
 
 option = {
-    backgroundColor: 'rgba(0, 0, 0, 0)',
-    series: [
-        {
-            type: "gauge",
-            startAngle: 180,
-            endAngle: -360,
-            pointer: {
-                show: false,
-            },
-            progress: {
-                show: true,
-                overlap: false,
-                roundCap: false,
-                clip: false,
-                width: 10,
-                itemStyle: {
-                    backgroundColor: 'rgba(0, 0, 0, 0)' 
-                }
-            },
-            axisLine: {
-                lineStyle: {
-                    width: 35,
-                    color: [
-                        [1, 'rgba(0, 0, 0, 0)'] 
-                    ]
-                },
-            },
-            splitLine: {
-                show: false,
-                distance: 0,
-                length: 10,
-            },
-            axisTick: {
-                show: false,
-            },
-            axisLabel: {
-                show: false,
-                distance: 50,
-            },
-            data: gaugeData,
-            title: {
-                fontSize: 14,
-            },
-            detail: {
-                width: 50,
-                height: 14,
-                fontSize: 25,
-                formatter: '150K',
-                offsetCenter: ['0%', '10%'],
-                color: "#fff",
-            },
+    polar: {
+        radius: ['20%', '80%'],
+        center: ['50%', '50%']
+    },
+    angleAxis: {
+        max: 100,
+        startAngle: 180,
+        splitLine: {
+            show: false
         },
-    ],
+        axisLine: {
+            show: false
+        },
+        axisTick: {
+            show: false
+        },
+        axisLabel: {
+            show: false
+        },
+        interval: 0.5
+    },
+    radiusAxis: {
+        type: 'category',
+        data: ['Excéntricos', 'Lujosos', 'Económicos'],
+        axisLine: {
+            show: false
+        },
+        axisTick: {
+            show: false
+        },
+        axisLabel: {
+            show: false
+        }
+    },
+    tooltip: {
+        trigger: 'item',
+        backgroundColor: '#0B1739',
+        textStyle: {
+            color: '#fff'
+        },
+        formatter: function(params) {
+            var realValues = [valueExc, valueLuj, valueEcon];
+            return params.name + ': ' + realValues[params.dataIndex];
+        }
+    },
+    series: {
+        type: 'bar',
+        data: [
+            { value: valueExc ? (valueExc / (total || 1) * 100).toFixed(2) : 0, itemStyle: { color: '#00C2FF' }, name: 'Excéntricos' },
+            { value: valueLuj ? (valueLuj / (total || 1) * 100).toFixed(2) : 0, itemStyle: { color: '#0E43FB' }, name: 'Lujosos'},
+            { value: valueEcon ? (valueEcon / (total || 1) * 100).toFixed(2) : 0, itemStyle: { color: '#CB3CFF' }, name: 'Económicos' }
+        ],
+        coordinateSystem: 'polar',
+        barWidth: 10,
+        stack: 'total',
+        label: {
+            show: false
+        }
+    },
+    graphic: {
+        elements: [
+            {
+                type: 'text',
+                left: 'center',
+                top: 'center',
+                style: {
+                    text: total,
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    fill: '#fff' // Cambiar el color del texto a blanco
+                }
+            }
+        ]
+    }
 };
 
-if (option && typeof option === "object") {
-    myChart.setOption(option);
+if (option && typeof option === 'object') {
+    myChartDaily.setOption(option);
 }
-window.addEventListener("resize", myChart.resize);
 
-
-document.getElementById("ingresoMensualDisplay").addEventListener("click", function() {
-    myChart.dispose();
-    myChart = echarts.init(dom, null, {
-        renderer: "canvas",
-        useDirtyRect: false,
-    });
-    myChart.setOption(option);
+document.addEventListener('updateDailyIncome', (event) => {
+    const dailyIncome = event.detail.dailyIncome;
+    valueEcon = dailyIncome;
+    total = valueEcon + valueLuj + valueExc;
+    const econPercentage = valueEcon ? (valueEcon / total * 100).toFixed(2) : 0;
+    const lujPercentage = valueLuj ? (valueLuj / total * 100).toFixed(2) : 0;
+    const excPercentage = valueExc ? (valueExc / total * 100).toFixed(2) : 0;
+    option.series.data[2].value = Math.max((valueEcon / total * 100).toFixed(2), 1);
+    option.graphic.elements[0].style.text = total;
+    myChartDaily.setOption(option);
+    document.querySelector('.propiedades p:nth-child(1) span').textContent = `${econPercentage}%`;
+    document.querySelector('.propiedades p:nth-child(2) span').textContent = `${lujPercentage}%`;
+    document.querySelector('.propiedades p:nth-child(3) span').textContent = `${excPercentage}%`;
 });
+
+window.addEventListener('resize', myChartDaily.resize);

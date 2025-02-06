@@ -13,11 +13,11 @@
         <button class="searchbar-catalog_button" ></button>
     </div>
     <div class="filters-catalog">
-        <p>Economicos</p>
-        <p>Deportivos</p>
-        <p>Exoticos</p>
-        <p>Automaticos</p>
-        <p>Manuales</p>
+        <a href="{{ url_for('inicio.catalogoautos', categoria='Economico') }}"><p>Economicos</p></a>
+        <a href="{{ url_for('inicio.catalogoautos', categoria='Lujoso') }}"><p>Lujosos</p></a>
+        <a href="{{ url_for('inicio.catalogoautos', categoria='Exotico') }}"><p>Exoticos</p></a>
+        <a href="{{ url_for('inicio.catalogoautos', transmision='Automatica') }}"><p>Automaticos</p></a>
+        <a href="{{ url_for('inicio.catalogoautos', transmision='Manual') }}"><p>Manuales</p></a>
     </div>
     <div class="cards-container-catalgo">
         {% for auto in autos %}

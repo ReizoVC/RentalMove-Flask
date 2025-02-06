@@ -33,6 +33,7 @@ header {
   padding: 5px;
   top: 0;
   font-family: "League Spartan", serif;
+  z-index: 1000;
 }
 
 nav {
@@ -306,7 +307,6 @@ footer {
 .footer-icons a {
   margin: 0 10px;
 }
-
 
 .footer-icons img {
   width: 30px;
@@ -743,6 +743,7 @@ form button {
   font-size: 1.5em;
   font-weight: 600;
   color: #666666;
+  flex-wrap: wrap;
 }
 
 .filters-catalog p {
@@ -762,9 +763,10 @@ form button {
   margin: 0 auto;
   border-radius: 20px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(25rem, 2fr));
   gap: 10px;
   justify-items: center;
+  margin-bottom: 100px;
 }
 
 .card-catalogo {
@@ -793,6 +795,9 @@ form button {
   margin: 10px;
   p {
     color: #939393;
+  }
+  h2{
+    font-size: 1.4em;
   }
 }
 
@@ -1005,3 +1010,4 @@ dialog {
 }
 
 /* Notificaciones Fin */
+

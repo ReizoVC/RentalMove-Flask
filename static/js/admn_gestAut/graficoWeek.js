@@ -1,10 +1,10 @@
-var dom = document.getElementById('weekGraphic');
-var myChart = echarts.init(dom, null, {
+var domWeek = document.getElementById('weekGraphic');
+var myChartWeek = echarts.init(domWeek, null, {
     renderer: 'canvas',
     useDirtyRect: false
 });
 
-var option = {
+var optionWeek = {
     xAxis: {
         type: 'category',
         boundaryGap: false,
@@ -65,11 +65,11 @@ var option = {
     ]
 };
 
-if (option && typeof option === 'object') {
-    myChart.setOption(option);
+if (optionWeek && typeof optionWeek === 'object') {
+    myChartWeek.setOption(optionWeek);
 }
 
 window.addEventListener('resize', function() {
-    myChart.resize();
+    myChartWeek.resize();
 });
 

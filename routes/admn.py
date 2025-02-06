@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, redirect, url_for, flash, current_app
+from flask import Blueprint, request, render_template, redirect, url_for, flash, current_app, jsonify
 from utils.db import db
 from utils.decorators import admin_required
 from models.autos import Auto
@@ -9,6 +9,7 @@ import os
 from werkzeug.utils import secure_filename
 from utils.modules import get_vehicle_count, get_user_count, get_personal_count
 from flask_socketio import emit
+from datetime import datetime  # Importar datetime
 
 admn = Blueprint('admn', __name__)
 
@@ -22,8 +23,16 @@ def admin():
     personal_count = get_personal_count()
     prestamos = db.session.query(Prestamo, Usuario, Auto).join(Usuario, Prestamo.usuario_id == Usuario.id).join(Auto, Prestamo.auto_id == Auto.id).all()
     autos = Auto.query.all()
-    return render_template('adminPages/ad_home.html', vehicle_count=vehicle_count, user_count=user_count, personal_count=personal_count, prestamos=prestamos, autos=autos)
+    today = datetime.now()  # Obtener la fecha actual
+    daily_income = db.session.query(db.func.sum(Prestamo.precio_total)).filter(Prestamo.fecha_prestamo == today.date()).scalar() or 0
+    return render_template('adminPages/ad_home.html', vehicle_count=vehicle_count, user_count=user_count, personal_count=personal_count, prestamos=prestamos, autos=autos, today=today, daily_income=daily_income)
 
+@admn.route('/api/daily-income', methods=['GET'])
+@admin_required
+def get_daily_income():
+    date = request.args.get('date')
+    daily_income = db.session.query(db.func.sum(Prestamo.precio_total)).filter(Prestamo.fecha_prestamo == date).scalar() or 0
+    return jsonify({'daily_income': daily_income})
 
 @admn.route('/admin/vehiculos')
 @admin_required

@@ -1,11 +1,11 @@
-var dom = document.getElementById('monthGraphic');
-var myChart = echarts.init(dom, null, {
+var domMonth = document.getElementById('monthGraphic');
+var myChartMonth = echarts.init(domMonth, null, {
     renderer: 'canvas',
     useDirtyRect: false
 });
-var app = {};
+var appMonth = {};
 
-var option;
+var optionMonth;
 
 let xAxisData = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sept', 'Oct', 'Nov', 'Dic'];
 let data1 = [];
@@ -22,7 +22,7 @@ var emphasisStyle = {
         shadowColor: 'rgba(0,0,0,0.3)'
     }
 };
-option = {
+optionMonth = {
     color: ['#CB3CFF', '#0E43FB', '#00C2FF'],
     legend: {
         data: [
@@ -101,8 +101,8 @@ option = {
         }
     ]
 };
-if (option && typeof option === 'object') {
-    myChart.setOption(option);
+if (optionMonth && typeof optionMonth === 'object') {
+    myChartMonth.setOption(optionMonth);
 }
 
-window.addEventListener('resize', myChart.resize);
+window.addEventListener('resize', myChartMonth.resize);
