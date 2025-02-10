@@ -14,11 +14,11 @@
                 <p><span>{{ current_user.nombre }}</span></p>
                 <div class="dropdown" id="header-popover">
                     <button class="dropbtn"><img src="{{url_for('static', filename='svg/arrow-down.svg')}}" alt=""></button>
-                    <div class="dropdown-content">
+                    <div class="dropdown-content" id="dropdown-content">
                         <a href="/account" class="lgdopt" >Cuenta</a>
                         <a href="/history" class="lgdopt" >Historial</a>
                         {% if current_user.rol == 'admin' %}
-                            <a href="/admin" class="lgdopt" >Admin</a>
+                            <a href="/admin" class="lgdopt" >Admin</a> 
                         {% endif %}
                         <button class="logout-button" id="header-Logout" onclick="window.location.href='/logout'">Logout</button>
                     </div>
@@ -117,4 +117,4 @@
             </div>
         </div>
     </dialog>
-</header> 
+</header>

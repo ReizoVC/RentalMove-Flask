@@ -216,8 +216,8 @@ header {
     top: 80px;
     right: 13%;
     flex-direction: column;
-    background-color: rgba(197, 197, 197, 0.8);
-    backdrop-filter: blur(15px) !important;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 1px 2px 6.1px 2px rgba(0, 0, 0, 0.25);
     z-index: 1000;
     min-width: fit-content;
     width: 40%;
@@ -280,29 +280,49 @@ main {
   padding-left: 40px;
   padding-bottom: 6%;
 }
-
-.marcasSlider {
-  display: grid;
+/* Marca Slider */
+.slider{
   height: 15vh;
-  grid-template-columns: repeat(7, 1fr);
-  justify-items: center;
-  align-content: center;
+  width: 100%;
+  overflow: hidden;
+  display: inline-grid;
 }
 
-.logosSlider {
+.slider .slide-track{
+  display: grid;
+  grid-template-columns: repeat(14, 1fr);
+  justify-items: center;
+  align-content: center;
+  animation: scroll 50s linear infinite;
+  -webkit-animation: scroll 50s linear infinite;
+  width: calc(205px * 14);
+}
+
+
+.slider .slide img{    
   height: 80px;
 }
 
-.logosSlider4 {
-  height: 70px;
-  margin: auto 20px;
-}
 
 .gris {
   filter: opacity(40%);
   z-index: -10;
 }
-
+.logosSlider4 {
+  height: 70px !important;
+  margin: auto 20px;
+}
+@keyframes scroll{
+  0%{
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+  }
+  100%{
+      -webkit-transform: translateX(calc(-205px * 7));
+      transform: translateX(calc(-205px * 7));
+  }
+}
+/* Marca Slider fin */
 .motd-hero {
   font-weight: 700;
   color: #fff;
@@ -344,7 +364,9 @@ main {
   gap: 20px;
 }
 
+
 .card {
+  flex: 1 1 auto;
   width: 300px;
   background-color: white;
   border-radius: 10px;
@@ -570,6 +592,8 @@ footer {
   padding: 20px;
   width: 50%;
 }
+
+
 
 .formImage {
   background-image: url('../images/registro/car-image.png');
@@ -829,12 +853,12 @@ form button {
 .lgdopt:hover {
   --clippy: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
-
+/* 
 .dropdown:hover .dropdown-content {
   display: flex;
   flex-direction: column;
   border-radius: 16px;
-}
+} */
 
 .logout-button {
   color: #000;
@@ -952,11 +976,14 @@ form button {
   gap: 20px;
   align-items: center;
   margin: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   p {
     color: #939393;
   }
   h2{
-    font-size: 1.4em;
+    font-size: 1.3em;
+    white-space: nowrap;    
   }
 }
 
@@ -1021,6 +1048,7 @@ form button {
   h1 {
     font-size: 4.1rem;
     margin: 10px 0;
+    text-align: center;
   }
   p {
     font-size: 1.3rem;
@@ -1072,6 +1100,8 @@ form button {
   display: flex;
   justify-content: space-around;
   padding: 50px 0;
+  gap: 150px;
+  flex-wrap: wrap;
   p {
     display: flex;
     flex-direction: column;
@@ -1122,6 +1152,51 @@ dialog {
   input {
     padding: 10px;
     font-size: 1em;
+  }
+}
+
+@media (max-width: 1000px) {
+  .modal-content{
+    width: 80%;
+  }
+  .left-section{
+    display: none;
+  }
+  .right-section{
+    width: 100%;
+  }
+  .motd-hero{
+    font-size: 3em;
+  }
+  .hero{
+    aspect-ratio: none;
+    height: 50vh;
+    width: 100%;
+    justify-content: space-around;
+  }
+}
+@media (max-width: 400px) {
+  .modal-content{
+    width: 90%;
+  }
+  .card_info-catalogo_bottom {
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h2 {
+      font-size: 1.8em;
+    }
+  }
+}
+@media (max-width: 500px) {
+  .card_info-catalogo_bottom {
+    h2 {
+      font-size: 1em;
+    }
+  }
+  .featuredSection{
+    width: auto !important;
   }
 }
 
@@ -1179,6 +1254,12 @@ dialog {
   .cards-container-catalgo{
     width: 90%;
   }
+  .container{
+    width: 80%;
+  }
+  .right-section{
+    padding: 20px 0;
+  }
 }
 
 @media (max-width: 500px) {
@@ -1187,5 +1268,7 @@ dialog {
     margin: 0 auto;
     grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
   }
-  
+  .container{
+    width: 95%;
+  }
 }

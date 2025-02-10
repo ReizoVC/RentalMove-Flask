@@ -6,12 +6,21 @@ from models.autos import Auto
 from models.prestamos import Prestamo
 from utils.db import db
 from datetime import datetime
+from sqlalchemy import func
 
 inicio = Blueprint('inicio', __name__)
 
 @inicio.route('/')
 def home():
-    return render_template('pages/index.html')
+    autos_destacados = db.session.query(
+        Auto, func.count(Prestamo.auto_id).label('total_ventas')
+    ).join(Prestamo, Auto.id == Prestamo.auto_id).group_by(Auto.id).order_by(func.count(Prestamo.auto_id).desc()).limit(4).all()
+    
+    autos_destacados = [auto for auto, total_ventas in autos_destacados]
+    
+    autos_nuevo_ingreso = Auto.query.order_by(Auto.id.desc()).limit(4).all()
+    
+    return render_template('pages/index.html', autos_destacados=autos_destacados, autos_nuevo_ingreso=autos_nuevo_ingreso)
 
 @inicio.route('/catalogo')
 def catalogoautos():
@@ -26,10 +35,6 @@ def catalogoautos():
         autos = Auto.query.all()
     
     return render_template('pages/catalogo.html', autos=autos)
-
-
-
-
 
 @inicio.route('/newuser', methods=['POST'])
 def newuser():

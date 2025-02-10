@@ -2,173 +2,114 @@
 
 {% block titulo %}Home{% endblock %}
 
-
 {% block body %}
-
 <main>
-
     <div class="hero">
         <h1 class="motd-hero">Alquila el <br>Auto de tus sueños</h1>
         <div class="searchBar">
             
         </div>        
     </div>
-    <div class="marcasSlider">
-        <img src="./static/images/index/nissan.png" alt="" class="logosSlider">
-        <img src="./static/images/index/lamborghini.webp" alt="" class="logosSlider gris">
-        <img src="./static/images/index/Toyota.png" alt="" class="logosSlider gris">
-        <img src="./static/images/index/hyundai.png" alt="" class="logosSlider gris logosSlider4">
-        <img src="./static/images/index/honda.png" alt="" class="logosSlider gris">
-        <img src="./static/images/index/volkswagen.webp" alt="" class="logosSlider gris">
-        <img src="./static/images/index/porsche.png" alt="" class="logosSlider">
+    <div class="slider">
+        <div class="slide-track">
+            <div class="slide">
+                <img src="{{url_for('static', filename='images/index/nissan.png')}}" alt="" class="logosSlider">
+            </div>
+            <div class="slide">
+                <img src="{{url_for('static', filename='images/index/lamborghini.webp')}}" alt="" class="logosSlider gris">
+            </div>
+            <div class="slide">
+                <img src="{{url_for('static', filename='images/index/Toyota.png')}}" alt="" class="logosSlider gris">
+            </div>
+            <div class="slide">
+                <img src="{{url_for('static', filename='images/index/hyundai.png')}}" alt="" class="logosSlider gris logosSlider4">
+            </div>
+            <div class="slide">
+                <img src="{{url_for('static', filename='images/index/honda.png')}}" alt="" class="logosSlider gris">
+            </div>
+            <div class="slide">
+                <img src="{{url_for('static', filename='images/index/volkswagen.webp')}}" alt="" class="logosSlider gris">
+            </div>
+            <div class="slide">
+                <img src="{{url_for('static', filename='images/index/porsche.png')}}" alt="" class="logosSlider">
+            </div>
+            <!-- separador -->
+            <div class="slide">
+                <img src="{{url_for('static', filename='images/index/nissan.png')}}" alt="" class="logosSlider">
+            </div>
+            <div class="slide">
+                <img src="{{url_for('static', filename='images/index/lamborghini.webp')}}" alt="" class="logosSlider gris">
+            </div>
+            <div class="slide">
+                <img src="{{url_for('static', filename='images/index/Toyota.png')}}" alt="" class="logosSlider gris">
+            </div>
+            <div class="slide">
+                <img src="{{url_for('static', filename='images/index/hyundai.png')}}" alt="" class="logosSlider gris logosSlider4">
+            </div>
+            <div class="slide">
+                <img src="{{url_for('static', filename='images/index/honda.png')}}" alt="" class="logosSlider gris">
+            </div>
+            <div class="slide">
+                <img src="{{url_for('static', filename='images/index/volkswagen.webp')}}" alt="" class="logosSlider gris">
+            </div>
+            <div class="slide">
+                <img src="{{url_for('static', filename='images/index/porsche.png')}}" alt="" class="logosSlider">
+            </div>
+        </div>
     </div>
     <div class="mainCardsCont">
         <div class="featuredSection">
             <div class="firstField cardsField">
                 <div class="topPagination">
                     <h2>Destacados <span class="star-icon">⭐</span></h2>
-                    <div class="pagination">
-                        <span>1/6</span>
-                        <button class="prev-arrow">←</button>
-                        <button class="next-arrow">→</button>
-                    </div>
                 </div>
                 <div class="cardsContainer">
-                    <div class="card">
-                        <img src="./static/images/index/porsche-8327242.jpg" alt="Car Image">
-                        <div class="card-content">
-                            <h3>2045 Corolla</h3>
-                            <p>80082 Millas</p>
-                            <div class="brand">
-                                <img src="./static/images/index/Toyota.png" alt="Toyota Logo" class="cardLogo">
-                                <span>Toyota</span>
+                    {% for auto in autos_destacados %}
+                    <div class="card-catalogo">
+                        <img class="card_img-catalogo" src="{{ url_for('static', filename=auto.imagen.replace('static/', '').replace('\\', '/')) }}" alt="{{ auto.modelo }}">
+                        <div class="card_info-catalogo">
+                            <div class="card_info-catalogo_top">
+                                <img src="{{ url_for('static', filename=('images/logosmarca/' ~ auto.marca ~ 'logo.webp')|lower) }}" alt="{{ auto.marca }}" class="card_marca-logo_catalogo">
+                                <div>
+                                    <h2>{{ auto.marca }} {{ auto.modelo }}</h2>
+                                    <p>{{ auto.transmision }} <span>• {{ auto.traccion }}</span></p>
+                                </div>
                             </div>
-                            <div class="cardBottom">
-                                <p class="price">$30 <span>Precio/Día</span></p>
-                                <button class="rent-button">Alquilar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img src="./static/images/index/porsche-8327242.jpg" alt="Car Image">
-                        <div class="card-content">
-                            <h3>2045 Corolla</h3>
-                            <p>80082 Millas</p>
-                            <div class="brand">
-                                <img src="./static/images/index/Toyota.png" alt="Toyota Logo" class="cardLogo">
-                                <span>Toyota</span>
-                            </div>
-                            <div class="cardBottom">
-                                <p class="price">$30 <span>Precio/Día</span></p>
-                                <button class="rent-button">Alquilar</button>
+                            <div class="card_info-catalogo_bottom">
+                                <a href="{{ url_for('inicio.alquilar_auto', auto_id=auto.id) }}" class="btn-alquilar_card-catalogo">Alquilar</a>
+                                <h2>${{ auto.precio_dia }}<span class="spanDia-catalogo">/dia</span></h2>
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <img src="./static/images/index/porsche-8327242.jpg" alt="Car Image">
-                        <div class="card-content">
-                            <h3>2045 Corolla</h3>
-                            <p>80082 Millas</p>
-                            <div class="brand">
-                                <img src="./static/images/index/Toyota.png" alt="Toyota Logo" class="cardLogo">
-                                <span>Toyota</span>
-                            </div>
-                            <div class="cardBottom">
-                                <p class="price">$30 <span>Precio/Día</span></p>
-                                <button class="rent-button">Alquilar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img src="./static/images/index/porsche-8327242.jpg" alt="Car Image">
-                        <div class="card-content">
-                            <h3>2045 Corolla</h3>
-                            <p>80082 Millas</p>
-                            <div class="brand">
-                                <img src="./static/images/index/Toyota.png" alt="Toyota Logo" class="cardLogo">
-                                <span>Toyota</span>
-                            </div>
-                            <div class="cardBottom">
-                                <p class="price">$30 <span>Precio/Día</span></p>
-                                <button class="rent-button">Alquilar</button>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
             <div class="secondField cardsField">
                 <div class="topPagination">
                     <h2>Nuevo Ingreso</h2>
-                    <div class="pagination">
-                        <span>1/6</span>
-                        <button class="prev-arrow">←</button>
-                        <button class="next-arrow">→</button>
-                    </div>
                 </div>
                 <div class="cardsContainer">
-                    <div class="card">
-                        <img src="./static/images/index/porsche-8327242.jpg" alt="Car Image">
-                        <div class="card-content">
-                            <h3>2045 Corolla</h3>
-                            <p>80082 Millas</p>
-                            <div class="brand">
-                                <img src="./static/images/index/Toyota.png" alt="Toyota Logo" class="cardLogo">
-                                <span>Toyota</span>
+                    {% for auto in autos_nuevo_ingreso %}
+                    <div class="card-catalogo">
+                        <img class="card_img-catalogo" src="{{ url_for('static', filename=auto.imagen.replace('static/', '').replace('\\', '/')) }}" alt="{{ auto.modelo }}">
+                        <div class="card_info-catalogo">
+                            <div class="card_info-catalogo_top">
+                                <img src="{{ url_for('static', filename=('images/logosmarca/' ~ auto.marca ~ 'logo.webp')|lower) }}" alt="{{ auto.marca }}" class="card_marca-logo_catalogo">
+                                <div>
+                                    <h2>{{ auto.marca }} {{ auto.modelo }}</h2>
+                                    <p>{{ auto.transmision }} <span>• {{ auto.traccion }}</span></p>
+                                </div>
                             </div>
-                            <div class="cardBottom">
-                                <p class="price">$30 <span>Precio/Día</span></p>
-                                <button class="rent-button">Alquilar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img src="./static/images/index/porsche-8327242.jpg" alt="Car Image">
-                        <div class="card-content">
-                            <h3>2045 Corolla</h3>
-                            <p>80082 Millas</p>
-                            <div class="brand">
-                                <img src="./static/images/index/Toyota.png" alt="Toyota Logo" class="cardLogo">
-                                <span>Toyota</span>
-                            </div>
-                            <div class="cardBottom">
-                                <p class="price">$30 <span>Precio/Día</span></p>
-                                <button class="rent-button">Alquilar</button>
+                            <div class="card_info-catalogo_bottom">
+                                <a href="{{ url_for('inicio.alquilar_auto', auto_id=auto.id) }}" class="btn-alquilar_card-catalogo">Alquilar</a>
+                                <h2>${{ auto.precio_dia }}<span class="spanDia-catalogo">/dia</span></h2>
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <img src="./static/images/index/porsche-8327242.jpg" alt="Car Image">
-                        <div class="card-content">
-                            <h3>2045 Corolla</h3>
-                            <p>80082 Millas</p>
-                            <div class="brand">
-                                <img src="./static/images/index/Toyota.png" alt="Toyota Logo" class="cardLogo">
-                                <span>Toyota</span>
-                            </div>
-                            <div class="cardBottom">
-                                <p class="price">$30 <span>Precio/Día</span></p>
-                                <button class="rent-button">Alquilar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img src="./static/images/index/porsche-8327242.jpg" alt="Car Image">
-                        <div class="card-content">
-                            <h3>2045 Corolla</h3>
-                            <p>80082 Millas</p>
-                            <div class="brand">
-                                <img src="./static/images/index/Toyota.png" alt="Toyota Logo" class="cardLogo">
-                                <span>Toyota</span>
-                            </div>
-                            <div class="cardBottom">
-                                <p class="price">$30 <span>Precio/Día</span></p>
-                                <button class="rent-button">Alquilar</button>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </div>
 </main>
-{%endblock %}
+{% endblock %}

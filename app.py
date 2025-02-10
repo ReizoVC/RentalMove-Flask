@@ -3,7 +3,7 @@ eventlet.monkey_patch()
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_socketio import SocketIO, emit, join_room, disconnect
+from flask_socketio import SocketIO, join_room, disconnect
 from sqlalchemy.orm import Session
 from routes.inicio import inicio
 from routes.admn import admn
