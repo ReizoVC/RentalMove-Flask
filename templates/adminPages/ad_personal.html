@@ -31,7 +31,8 @@
             <h1>Lista de Empleados</h1>
             <button id="AdminAddNewEmployee">NUEVO EMPLEADO</button>
         </div>
-        <table>
+        <!-- Tabla de personal -->
+        <table class="admin-table">
             <thead>
                 <tr class="admin-table-header admin-table-header-personal">
                     <th>Nombre</th>
@@ -62,5 +63,25 @@
                 {% endfor %}
             </tbody>
         </table>
+        <!-- Vista de tarjetas de personal -->
+        <div class="cards-container-crud">
+            {% for personal in personal_list %}
+            <div class="card-crud">
+                <div class="card_info-crud">
+                    <h2>{{ personal.nombre }} {{ personal.apellido }}</h2>
+                    <p>Email: {{ personal.correo }}</p>
+                    <p>Contraseña: {{ personal.contrasena }}</p>
+                    <p>Nro. DNI: {{ personal.nroDni }}</p>
+                    <p>Permisos: {{ personal.rol }}</p>
+                    <div class="card_actions-crud">
+                        <button class="edit-employee-btn" data-id="{{ personal.id }}" data-nombre="{{ personal.nombre }}" data-apellido="{{ personal.apellido }}" data-correo="{{ personal.correo }}" data-contrasena="{{ personal.contrasena }}" data-nroDni="{{ personal.nroDni }}" data-rol="{{ personal.rol }}">Editar</button>
+                        <form action="{{ url_for('admn.eliminar_personal', personal_id=personal.id) }}" method="POST" class="delete-employee-form">
+                            <button type="submit" class="delete-employee-btn">Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </main>
 {% endblock %}

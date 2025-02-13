@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div class="sidebar" id="sidebar">
     <div class="profile">
         <img src="{{url_for('static', filename='images/logo.png')}}" alt="Profile Icon">
         <h2>{{ current_user.nombre }} {{ current_user.apellido }}</h2>
@@ -6,20 +6,53 @@
     </div>
     <nav class="menu">
         <ul>
-            <li class="{% if request.path == '/admin' %}active{% endif %}" >
-                <a href="/admin"><img class="icon-home icon" src="{{url_for('static', filename='svg/ad_svg/home.svg')}}" alt="" >Home</a>
+            <li class="{% if request.path == '/admin' %}active{% endif %}">
+                <a href="/admin"><img class="icon-home icon" src="{{url_for('static', filename='svg/ad_svg/home.svg')}}" alt=""><span>Home</span></a>
             </li>
-            <li class="{% if request.path == '/admin/vehiculos' %}active{% endif %}" >
-                <a href="/admin/vehiculos"><img class="icon-car icon" src="{{url_for('static', filename='svg/ad_svg/car.svg')}}" alt="" >Vehículos</a>
+            <li class="{% if request.path == '/admin/vehiculos' %}active{% endif %}">
+                <a href="/admin/vehiculos"><img class="icon-car icon" src="{{url_for('static', filename='svg/ad_svg/car.svg')}}" alt=""><span>Vehículos</span></a>
             </li>
-            <li class="{% if request.path == '/admin/usuarios' %}active{% endif %}" >
-                <a href="/admin/usuarios"><img class="icon-users icon" src="{{url_for('static', filename='svg/ad_svg/user.svg')}}" alt="" >Usuarios</a>
+            <li class="{% if request.path == '/admin/usuarios' %}active{% endif %}">
+                <a href="/admin/usuarios"><img class="icon-users icon" src="{{url_for('static', filename='svg/ad_svg/user.svg')}}" alt=""><span>Usuarios</span></a>
             </li>
-            <li class="{% if request.path == '/admin/personal' %}active{% endif %}" >
-                <a href="/admin/personal"><img class="icon-personal icon" src="{{url_for('static', filename='svg/ad_svg/personal.svg')}}" alt="" >Personal</a>
+            <li class="{% if request.path == '/admin/personal' %}active{% endif %}">
+                <a href="/admin/personal"><img class="icon-personal icon" src="{{url_for('static', filename='svg/ad_svg/personal.svg')}}" alt=""><span>Personal</span></a>
             </li>
-            <li><a href="/"><img class="icon-inicio icon" src="{{url_for('static', filename='svg/ad_svg/inicio.svg')}}" alt="" >Inicio</a></li>
+            <li><a href="/"><img class="icon-inicio icon" src="{{url_for('static', filename='svg/ad_svg/inicio.svg')}}" alt=""><span>Inicio</span></a></li>
         </ul>
     </nav>
-    <a class="log-out" onclick="window.location.href='/logout'" >Logout<img class="logout-icon icon" src="{{url_for('static', filename='svg/ad_svg/logout.svg')}}" alt="" ></a>
+    <div>
+        <button class="toggle-btn" id="toggleSidebar"><span>Retract</span><img src="{{url_for('static', filename='svg/ad_svg/toggle.svg')}}" alt="Toggle Sidebar"></button>
+        <a class="log-out" onclick="window.location.href='/logout'"><span>Logout</span><img class="logout-icon icon" src="{{url_for('static', filename='svg/ad_svg/logout.svg')}}" alt=""></a>
+    </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.getElementById('sidebar');
+        const toggleSidebar = document.getElementById('toggleSidebar');
+        const mainContent = document.querySelector('main');
+
+        // Check localStorage for sidebar state
+        if (localStorage.getItem('sidebarCollapsed') === 'true' || window.innerWidth < 1500) {
+            sidebar.classList.add('collapsed');
+            mainContent.classList.add('collapsed');
+        }
+
+        toggleSidebar.addEventListener('click', function() {
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('collapsed');
+            // Save sidebar state to localStorage
+            localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
+        });
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth < 1500) {
+                sidebar.classList.add('collapsed');
+                mainContent.classList.add('collapsed');
+            } else if (localStorage.getItem('sidebarCollapsed') !== 'true') {
+                sidebar.classList.remove('collapsed');
+                mainContent.classList.remove('collapsed');
+            }
+        });
+    });
+</script>

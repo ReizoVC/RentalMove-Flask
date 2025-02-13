@@ -25,10 +25,19 @@ body {
   height: 100vh;
 }
 
-main{
+main {
   margin-left: 250px;
-  padding: 0; 
+  padding: 0;
   height: 100vh;
+  transition: margin-left 0.3s;
+}
+
+main.collapsed {
+  margin-left: 80px;
+}
+
+.sidebar.collapsed + main {
+  margin-left: 80px;
 }
 
 .sidebar {
@@ -46,6 +55,79 @@ main{
   justify-content: space-between;
   align-items: center;
   z-index: 1000; /* Asegura que esté por encima de otros elementos */
+  transition: width 0.3s;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+.sidebar.collapsed .profile h2,
+.sidebar.collapsed .profile p,
+.sidebar.collapsed .menu ul li a span,
+.sidebar.collapsed .log-out span {
+  display: none;
+}
+
+.sidebar.collapsed .profile img {
+  width: 50px;
+  height: 50px;
+}
+
+.sidebar.collapsed .icon {
+  margin-right: 0;
+}
+
+.sidebar.collapsed nav ul li a {
+  padding: 10px;
+}
+
+.sidebar.collapsed .log-out {
+  padding: 10px;
+}
+
+.sidebar.collapsed .log-out span {
+  display: none;
+}
+
+.toggle-btn {
+  margin-top: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 50px;
+  border-radius: 5px;
+  z-index: 10;
+}
+
+.toggle-btn img {
+  width: 25px;
+  height: 25px;
+  margin-left: 10px;
+  transition: transform 0.3s;
+}
+
+.sidebar.collapsed .toggle-btn img {
+  transform: rotate(180deg);
+}
+
+.sidebar.collapsed .toggle-btn {
+  padding: 10px;
+}
+
+.sidebar.collapsed .toggle-btn span {
+  display: none;
+}
+
+.toggle-btn span {
+  font-size: 1.2em;
+  color: #333;
+  font-family: 'Poppins', sans-serif;
 }
 
 .profile {
@@ -191,9 +273,8 @@ nav ul li a {
   margin: 80px auto;
   font-family: "Mona Sans";
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
-  height: 10%;
   align-content: center;
   justify-items: center;
 }
@@ -870,3 +951,37 @@ calendar-month {
 
 
 /* date popover fin */
+
+.cards-container-crud {
+  display: none;
+  width: 100%;
+  padding: 10px;
+  margin: 0 auto;
+  border-radius: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+.card-crud {
+  flex: 1 1 calc(25% - 20px);
+  max-width: 400px;
+  background-color: #ebebeb;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 4px 4px 4.3px 0px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 600px) {
+  .card-crud {
+    flex: 1 1 80%;
+    max-width: none;
+    padding: 10px;
+  }
+  main {
+    margin-left: 40px !important;
+  }
+}

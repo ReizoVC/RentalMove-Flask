@@ -34,8 +34,8 @@
             <h1>Lista de Usuarios</h1>
             <button id="AdminAddNewUser">NUEVO USUARIO</button>
         </div>
-        <!--  -->
-        <table>
+        <!-- Tabla de usuarios -->
+        <table class="admin-table">
             <thead>
                 <tr class="admin-table-header">
                     <th>Nombre</th>
@@ -68,8 +68,27 @@
                 {% endfor %}
             </tbody>
         </table>
-    </main>
-    
+        <!-- Vista de tarjetas de usuarios -->
+        <div class="cards-container-crud">
+            {% for usuario in usuarios %}
+            <div class="card-crud">
+                <div class="card_info-crud">
+                    <h2>{{ usuario.nombre }} {{ usuario.apellido }}</h2>
+                    <p>Email: {{ usuario.correo }}</p>
+                    <p>Contraseña: {{ usuario.contrasena }}</p>
+                    <p>Nro. Licencia: {{ usuario.nroLicencia }}</p>
+                    <p>Nro. DNI: {{ usuario.nroDni }}</p>
+                    <p>Permisos: {{ usuario.rol }}</p>
+                    <div class="card_actions-crud">
+                        <button class="edit-user-btn" data-id="{{ usuario.id }}" data-nombre="{{ usuario.nombre }}" data-apellido="{{ usuario.apellido }}" data-correo="{{ usuario.correo }}" data-contrasena="{{ usuario.contrasena }}" data-nroLicencia="{{ usuario.nroLicencia }}" data-nroDni="{{ usuario.nroDni }}" data-rol="{{ usuario.rol }}">Editar</button>
+                        <form action="{{ url_for('admn.eliminar_usuario', usuario_id=usuario.id) }}" method="POST" class="delete-user-form">
+                            <button type="submit" class="delete-user-btn">Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </main>
 
 {% endblock %}

@@ -91,6 +91,8 @@ def alquilar_auto(auto_id):
         status = 'pendiente'  # Default status
         fecha_prestamo = datetime.now().date()  # Fecha del día en que se realizó el préstamo
 
+        
+        
         # Guardar la transacción en la base de datos
         transaccion = Prestamo(
             usuario_id=current_user.id,

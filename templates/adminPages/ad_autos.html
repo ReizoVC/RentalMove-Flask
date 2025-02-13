@@ -52,7 +52,7 @@
             <h1>Lista de Vehiculos</h1>
             <button id="AdminAddNewAuto">NUEVO AUTO</button>
         </div>
-        <table>
+        <table class="admin-table">
             <thead>
                 <tr class="admin-table-header admin-table-header-autos">
                     <th>Imagen</th>
@@ -91,5 +91,27 @@
                 {% endfor %}
             </tbody>
         </table>
+        <div class="cards-container-crud">
+            {% for auto in autos %}
+            <div class="card-crud">
+                <img src="{{ url_for('static', filename=auto.imagen.replace('static/', '').replace('\\', '/')) }}" alt="Imagen del auto" class="admin-form-img">
+                <div class="card_info-crud">
+                    <h2>{{ auto.marca }} {{ auto.modelo }}</h2>
+                    <p>Transmision: {{ auto.transmision }}</p>
+                    <p>Traccion: {{ auto.traccion }}</p>
+                    <p>Potencia: {{ auto.potencia }} HP</p>
+                    <p>Precio/Dia: ${{ auto.precio_dia }}</p>
+                    <p>Stock: {{ auto.stock }}</p>
+                    <p>Categoria: {{ auto.categoria }}</p>
+                    <div class="card_actions-crud">
+                        <button class="edit-auto-btn" data-id="{{ auto.id }}" data-imagen="{{ auto.imagen }}" data-marca="{{ auto.marca }}" data-modelo="{{ auto.modelo }}" data-precio_dia="{{ auto.precio_dia }}" data-transmision="{{ auto.transmision }}" data-traccion="{{ auto.traccion }}" data-potencia="{{ auto.potencia }}" data-stock="{{ auto.stock }}" data-categoria="{{ auto.categoria }}">Editar</button>
+                        <form action="{{ url_for('admn.eliminar_auto', auto_id=auto.id) }}" method="POST" class="delete-auto-form">
+                            <button type="submit" class="delete-auto-btn">Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </main>
 {% endblock %}
