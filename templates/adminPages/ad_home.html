@@ -131,6 +131,26 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                <div class="cards-container-crud">
+                    {% for prestamo in prestamos %}
+                    <div class="card-crud">
+                        <p><strong>ID:</strong> 🟪#{{ prestamo.Prestamo.id }}</p>
+                        <p><strong>Cliente:</strong> {{ prestamo.Usuario.nombre }} {{ prestamo.Usuario.apellido }} <span class="email"><br>{{ prestamo.Usuario.correo }}</span></p>
+                        <p><strong>Auto:</strong> {{ prestamo.Auto.marca }} {{ prestamo.Auto.modelo }}</p>
+                        <p><strong>F. Inicio:</strong> {{ prestamo.Prestamo.fecha_inicio.strftime('%b %d, %Y') }}</p>
+                        <p><strong>F. Fin:</strong> {{ prestamo.Prestamo.fecha_fin.strftime('%b %d, %Y') }}</p>
+                        <p class="status"><strong>Status:</strong> <span class="{{ prestamo.Prestamo.status|lower }}">{{ prestamo.Prestamo.status }}</span></p>
+                        <p><strong>Precio Total:</strong> ${{ prestamo.Prestamo.precio_total }}</p>
+                        <div class="actions">
+                            {% if prestamo.Prestamo.status == 'pendiente' %}
+                            <form action="{{ url_for('admn.aprobar_prestamo', prestamo_id=prestamo.Prestamo.id) }}" method="POST">
+                                <button type="submit">Aprobar</button>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
         <!-- Ingresos Mensuales -->
@@ -221,7 +241,7 @@
             </div>
             <div class="status-loans">
                 <div class="status-loans-header">
-                    <h2>Todos los Vehiculos</h2>
+                    <h2>Stock de Vehiculos</h2>
                     <p><span>1 - 10</span> de 10</p>
                 </div>
                 <hr>
@@ -261,6 +281,23 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                <div class="cards-container-crud">
+                    {% for auto in autos %}
+                    <div class="card-crud">
+                        <p><strong>Producto:</strong> {{ auto.marca }} {{ auto.modelo }}</p>
+                        <p><strong>Categoria:</strong> {{ auto.categoria }}</p>
+                        <p><strong>Precio:</strong> ${{ auto.precio_dia }}/dia</p>
+                        <p class="status-type {{ 'status-type-stock' if auto.disponibilidad else 'status-type-outStock' }}">
+                            <strong>Status:</strong> {{ 'En Stock' if auto.disponibilidad else 'Sin Stock' }}
+                        </p>
+                        <div class="actions">
+                            <form action="{{ url_for('admn.agregar_stock', auto_id=auto.id) }}" method="POST" style="display:inline;">
+                                <button type="submit" class="addBtnCont" >+</button>
+                            </form>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
         <!-- Informe de Reseñas -->
