@@ -6,8 +6,8 @@ var myChartDaily = echarts.init(domDaily, null, {
 var app = {};
 
 var valueEcon = 0;
-var valueLuj = 200;
-var valueExc = 300;
+var valueLuj = 0;
+var valueExc = 0;
 var total = valueEcon + valueLuj + valueExc;
 
 option = {

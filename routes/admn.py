@@ -9,7 +9,7 @@ import os
 from werkzeug.utils import secure_filename
 from utils.modules import get_vehicle_count, get_user_count, get_personal_count
 from flask_socketio import emit
-from datetime import datetime  # Importar datetime
+from datetime import datetime, timedelta  # Importar datetime y timedelta
 
 admn = Blueprint('admn', __name__)
 
@@ -25,7 +25,16 @@ def admin():
     autos = Auto.query.all()
     today = datetime.now()  # Obtener la fecha actual
     daily_income = db.session.query(db.func.sum(Prestamo.precio_total)).filter(Prestamo.fecha_prestamo == today.date()).scalar() or 0
-    return render_template('adminPages/ad_home.html', vehicle_count=vehicle_count, user_count=user_count, personal_count=personal_count, prestamos=prestamos, autos=autos, today=today, daily_income=daily_income)
+    
+    # Calcular ingresos semanales
+    start_of_week = today - timedelta(days=today.weekday())
+    weekly_income = []
+    for i in range(7):
+        day = start_of_week + timedelta(days=i)
+        income = db.session.query(db.func.sum(Prestamo.precio_total)).filter(Prestamo.fecha_prestamo == day.date()).scalar() or 0
+        weekly_income.append(income)
+    
+    return render_template('adminPages/ad_home.html', vehicle_count=vehicle_count, user_count=user_count, personal_count=personal_count, prestamos=prestamos, autos=autos, today=today, daily_income=daily_income, weekly_income=weekly_income)
 
 @admn.route('/api/daily-income', methods=['GET'])
 @admin_required
@@ -148,7 +157,6 @@ def actualizar_usuario():
 
     
     if usuario.rol == 'usuario' and nuevo_rol == 'admin':
-        # Agregar a la tabla personal si el rol cambia de usuario a admin
         nuevo_personal = Personal(
             nombre=usuario.nombre,
             apellido=usuario.apellido,
@@ -159,7 +167,6 @@ def actualizar_usuario():
         )
         db.session.add(nuevo_personal)
         db.session.commit()
-        # Eliminar de la tabla usuarios
         db.session.delete(usuario)
         db.session.commit()
     else:
@@ -182,17 +189,17 @@ def actualizar_personal():
     nuevo_rol = request.form['rol']
 
     if personal.rol == 'admin' and nuevo_rol == 'usuario':
-        # Eliminar de la tabla personal si el rol cambia de admin a usuario
+
         db.session.delete(personal)
         db.session.commit()
         
-        # Agregar a la tabla usuarios
+
         nuevo_usuario = Usuario(
             nombre=personal.nombre,
             apellido=personal.apellido,
             correo=personal.correo,
             contrasena=personal.contrasena,
-            nroLicencia='',  # Asigna un valor adecuado si es necesario
+            nroLicencia='', 
             nroDni=personal.nroDni,
             rol='usuario'
         )

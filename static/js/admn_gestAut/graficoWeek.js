@@ -4,11 +4,13 @@ var myChartWeek = echarts.init(domWeek, null, {
     useDirtyRect: false
 });
 
+var weeklyIncome = JSON.parse(document.getElementById('weekly-income').value);
+
 var optionWeek = {
     xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: ['Mon', '', '', 'Tue', '','Wed',  '','Thu', '', 'Fri', '', 'Sat', '', 'Sun', '', '', ''],
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
         splitLine: {
             show: false
         },
@@ -36,7 +38,7 @@ var optionWeek = {
     },
     series: [
         {
-            data: [0, 100, 200, 100, 150, 300, 300, 450, 450, 450, 500, 340, 300, 350, 360, 370, 300, 300, 800],
+            data: weeklyIncome,
             type: 'line',
             areaStyle: {
                 color: {
