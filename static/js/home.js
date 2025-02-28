@@ -43,8 +43,57 @@ btnAbrirLogin2.addEventListener('click', () => {
     modalRegister.style.display = 'none';
 });
 
+const btnAlquilar = document.getElementById('btn-alquilar');
 
+if (btnAlquilar) {
+    btnAlquilar.addEventListener('click', (event) => {
+        if (!currentUser) {  // Asumiendo que currentUser es una variable global que indica si el usuario está autenticado
+            event.preventDefault();
+            modalRegister.style.display = 'flex';
+        } else if (currentUserRole === 'admin') {  // Asumiendo que currentUserRole es una variable global que indica el rol del usuario
+            event.preventDefault();
+            showAlert('Solo los usuarios pueden alquilar autos, no los administradores.');
+        }
+    });
+}
 
+const btnsAlquilar = document.querySelectorAll('.btn-alquilar_card-catalogo');
+
+btnsAlquilar.forEach(btn => {
+    btn.addEventListener('click', (event) => {
+        if (!currentUser) {  // Asumiendo que currentUser es una variable global que indica si el usuario está autenticado
+            event.preventDefault();
+            modalRegister.style.display = 'flex';
+            showAlert('Debes iniciar sesión para poder alquilar un auto.');
+        } else if (currentUserRole === 'admin') {  // Asumiendo que currentUserRole es una variable global que indica el rol del usuario
+            event.preventDefault();
+            showAlert('Solo los usuarios pueden alquilar autos, no los administradores.');
+        }
+    });
+});
+
+const modalBtnAlquilar = document.querySelector('.modal-btn_alquiler');
+
+if (modalBtnAlquilar) {
+    modalBtnAlquilar.addEventListener('click', (event) => {
+        if (currentUserRole === 'admin') {
+            event.preventDefault();
+            showAlert('Solo los usuarios pueden alquilar autos, no los administradores.');
+        }
+    });
+}
+
+function showAlert(message) {
+    const alertContainer = document.createElement('div');
+    alertContainer.className = 'alert-popup';
+    alertContainer.innerText = message;
+    document.body.appendChild(alertContainer);
+    alertContainer.style.display = 'block';
+    setTimeout(() => {
+        alertContainer.style.display = 'none';
+        document.body.removeChild(alertContainer);
+    }, 3000);
+}
 
 async function submitForm(event) {
     event.preventDefault();

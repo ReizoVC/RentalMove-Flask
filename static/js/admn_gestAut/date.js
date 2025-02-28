@@ -12,11 +12,16 @@ selectedDateField.textContent = `${formattedToday}`;
 fetch(`/api/daily-income?date=${todayISO}`)
     .then(response => response.json())
     .then(data => {
-        const dailyIncome = data.daily_income;
-        document.getElementById('daily-income').value = dailyIncome;
-        console.log(`Daily Income: ${dailyIncome}`); // Imprimir en la consola
+        const dailyIncome = {
+            economicos: data.income_economicos,
+            lujosos: data.income_lujosos,
+            excentricos: data.income_excentricos
+        };
+        document.getElementById('income-economicos').value = dailyIncome.economicos;
+        document.getElementById('income-lujosos').value = dailyIncome.lujosos;
+        document.getElementById('income-excentricos').value = dailyIncome.excentricos;
+        console.log(`Daily Income: ${JSON.stringify(dailyIncome)}`); // Imprimir en la consola
         updateDailyIncomeChart(dailyIncome);
-        valueEcon = dailyIncome; // Actualizar valueEcon con los datos recibidos
     });
 
 document.getElementById('show-calendar').addEventListener('click', () => {
@@ -38,11 +43,16 @@ datePopover.addEventListener('change', (event) => {
     fetch(`/api/daily-income?date=${event.target.value}`)
         .then(response => response.json())
         .then(data => {
-            const dailyIncome = data.daily_income;
-            document.getElementById('daily-income').value = dailyIncome;
-            console.log(`Daily Income: ${dailyIncome}`); // Imprimir en la consola
+            const dailyIncome = {
+                economicos: data.income_economicos,
+                lujosos: data.income_lujosos,
+                excentricos: data.income_excentricos
+            };
+            document.getElementById('income-economicos').value = dailyIncome.economicos;
+            document.getElementById('income-lujosos').value = dailyIncome.lujosos;
+            document.getElementById('income-excentricos').value = dailyIncome.excentricos;
+            console.log(`Daily Income: ${JSON.stringify(dailyIncome)}`); // Imprimir en la consola
             updateDailyIncomeChart(dailyIncome);
-            valueEcon = dailyIncome; // Actualizar valueEcon con los datos recibidos
         });
 });
 

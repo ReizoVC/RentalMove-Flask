@@ -3,6 +3,10 @@
 {% block titulo %}Alquilar Auto{% endblock %}
 
 {% block body %}
+<script>
+    const currentUser = {{ 'true' if current_user.is_authenticated else 'false' }};
+    const currentUserRole = "{{ current_user.rol if current_user.is_authenticated else '' }}";
+</script>
 <main class="main_alquilar_auto">
     <div class="topInfo-Rent">            
         <img src="{{ url_for('static', filename=('images/logosmarca/' ~ auto.marca ~ 'logo.webp')|lower) }}" alt="{{ auto.modelo }} Logo" class="alquiler_Auto-Logo">
@@ -34,11 +38,31 @@
                 
                 <p>Precio total: $<span id="precio_total">0.00</span></p>
                 
-                <button type="submit" class="modal-btn_alquiler">Alquilar</button>
+                <button type="submit" class="modal-btn_alquiler" id="alquilarBtn">Alquilar</button>
             </form>
         </div>
     </dialog>
 </main>
 
 <script src="{{ url_for('static', filename='js/alquiler.js') }}"></script>
+<script>
+    document.getElementById('alquilarBtn').addEventListener('click', function(event) {
+        if (currentUserRole === 'admin') {
+            event.preventDefault();
+            showAlert('Solo los usuarios pueden alquilar autos, no los administradores.');
+        }
+    });
+
+    function showAlert(message) {
+        const alertContainer = document.createElement('div');
+        alertContainer.className = 'alert-popup';
+        alertContainer.innerText = message;
+        document.body.appendChild(alertContainer);
+        alertContainer.style.display = 'block';
+        setTimeout(() => {
+            alertContainer.style.display = 'none';
+            document.body.removeChild(alertContainer);
+        }, 3000);
+    }
+</script>
 {% endblock %}

@@ -2,10 +2,11 @@
 
 {% block titulo %}Catalogo de Autos{% endblock %}
 
-
 {% block body %}
-
-
+<script>
+    const currentUser = {{ 'true' if current_user.is_authenticated else 'false' }};
+    const currentUserRole = "{{ current_user.rol if current_user.is_authenticated else '' }}";
+</script>
 <main class=" main_catalogo">
     <img src="{{url_for('static', filename='images/catalogo/img_top.avif')}}" alt="" class="img-catalog_top">
     <h1 class="tittle-catalog_top">NUESTROS AUTOS</h1>
@@ -33,7 +34,7 @@
                         </div>
                     </div>
                     <div class="card_info-catalogo_bottom">
-                        <a href="{{ url_for('inicio.alquilar_auto', auto_id=auto.id) }}" class="btn-alquilar_card-catalogo">Alquilar</a>
+                        <a href="{{ url_for('inicio.alquilar_auto', auto_id=auto.id) }}" class="btn-alquilar_card-catalogo" id="btn-alquilar">Alquilar</a>
                         <h2>${{ auto.precio_dia }}<span class="spanDia-catalogo">/dia</span></h2>
                     </div>
                 </div>

@@ -7,6 +7,7 @@ from models.prestamos import Prestamo
 from utils.db import db
 from datetime import datetime
 from sqlalchemy import func
+from pytz import timezone
 
 inicio = Blueprint('inicio', __name__)
 
@@ -89,9 +90,8 @@ def alquilar_auto(auto_id):
         dias = (datetime.strptime(fecha_fin, '%Y-%m-%d') - datetime.strptime(fecha_inicio, '%Y-%m-%d')).days
         precio_total = dias * auto.precio_dia
         status = 'pendiente'
-        fecha_prestamo = datetime.now().date()
-
-        
+        lima_tz = timezone('America/Lima')
+        fecha_prestamo = datetime.now(lima_tz).date()
         
         transaccion = Prestamo(
             usuario_id=current_user.id,
@@ -111,6 +111,12 @@ def alquilar_auto(auto_id):
         db.session.commit()
 
         flash('Transacción completada exitosamente')
-        return redirect(url_for('inicio.catalogoautos'))
+        return redirect(url_for('inicio.agradecimiento', auto_id=auto.id))
 
     return render_template('inners/alquilar_auto.html', auto=auto)
+
+@inicio.route('/agradecimiento/<int:auto_id>')
+@login_required
+def agradecimiento(auto_id):
+    auto = Auto.query.get_or_404(auto_id)
+    return render_template('pages/agradecimiento.html', auto=auto)

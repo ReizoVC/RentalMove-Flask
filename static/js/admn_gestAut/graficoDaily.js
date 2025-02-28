@@ -5,10 +5,13 @@ var myChartDaily = echarts.init(domDaily, null, {
 });
 var app = {};
 
-var valueEcon = 0;
-var valueLuj = 0;
-var valueExc = 0;
+// Obtener los valores de ingresos por categoría del campo oculto en el HTML
+var valueEcon = parseFloat(document.getElementById('income-economicos').value) || 0;
+var valueLuj = parseFloat(document.getElementById('income-lujosos').value) || 0;
+var valueExc = parseFloat(document.getElementById('income-excentricos').value) || 0;
 var total = valueEcon + valueLuj + valueExc;
+
+console.log('Initial Values:', { valueEcon, valueLuj, valueExc, total });
 
 option = {
     polar: {
@@ -16,7 +19,7 @@ option = {
         center: ['50%', '50%']
     },
     angleAxis: {
-        max: 100,
+        max: Math.max(total, 100),
         startAngle: 180,
         splitLine: {
             show: false
@@ -59,9 +62,9 @@ option = {
     series: {
         type: 'bar',
         data: [
-            { value: valueExc ? (valueExc / (total || 1) * 100).toFixed(2) : 0, itemStyle: { color: '#00C2FF' }, name: 'Excéntricos' },
-            { value: valueLuj ? (valueLuj / (total || 1) * 100).toFixed(2) : 0, itemStyle: { color: '#0E43FB' }, name: 'Lujosos'},
-            { value: valueEcon ? (valueEcon / (total || 1) * 100).toFixed(2) : 0, itemStyle: { color: '#CB3CFF' }, name: 'Económicos' }
+            { value: valueExc, itemStyle: { color: '#00C2FF' }, name: 'Excéntricos' },
+            { value: valueLuj, itemStyle: { color: '#0E43FB' }, name: 'Lujosos'},
+            { value: valueEcon, itemStyle: { color: '#CB3CFF' }, name: 'Económicos' }
         ],
         coordinateSystem: 'polar',
         barWidth: 10,
@@ -93,17 +96,26 @@ if (option && typeof option === 'object') {
 
 document.addEventListener('updateDailyIncome', (event) => {
     const dailyIncome = event.detail.dailyIncome;
-    valueEcon = dailyIncome;
+    valueEcon = dailyIncome.economicos;
+    valueLuj = dailyIncome.lujosos;
+    valueExc = dailyIncome.excentricos;
     total = valueEcon + valueLuj + valueExc;
-    const econPercentage = valueEcon ? (valueEcon / total * 100).toFixed(2) : 0;
-    const lujPercentage = valueLuj ? (valueLuj / total * 100).toFixed(2) : 0;
-    const excPercentage = valueExc ? (valueExc / total * 100).toFixed(2) : 0;
-    option.series.data[2].value = Math.max((valueEcon / total * 100).toFixed(2), 1);
+    console.log('Updated Values:', { valueEcon, valueLuj, valueExc, total });
+    
+    // Actualizar los valores de la serie
+    option.series.data = [
+        { value: valueExc, itemStyle: { color: '#00C2FF' }, name: 'Excéntricos' },
+        { value: valueLuj, itemStyle: { color: '#0E43FB' }, name: 'Lujosos'},
+        { value: valueEcon, itemStyle: { color: '#CB3CFF' }, name: 'Económicos' }
+    ];
+    
+    // Actualizar el texto del gráfico
     option.graphic.elements[0].style.text = total;
+    
+    // Aplicar la opción actualizada al gráfico
     myChartDaily.setOption(option);
-    document.querySelector('.propiedades p:nth-child(1) span').textContent = `${econPercentage}%`;
-    document.querySelector('.propiedades p:nth-child(2) span').textContent = `${lujPercentage}%`;
-    document.querySelector('.propiedades p:nth-child(3) span').textContent = `${excPercentage}%`;
 });
 
-window.addEventListener('resize', myChartDaily.resize);
+window.addEventListener('resize', () => {
+    myChartDaily.resize();
+});

@@ -26,6 +26,11 @@ def admin():
     today = datetime.now()  # Obtener la fecha actual
     daily_income = db.session.query(db.func.sum(Prestamo.precio_total)).filter(Prestamo.fecha_prestamo == today.date()).scalar() or 0
     
+    # Calcular ingresos por categoría
+    income_economicos = db.session.query(db.func.sum(Prestamo.precio_total)).join(Auto).filter(Prestamo.fecha_prestamo == today.date(), Auto.categoria == 'Economico').scalar() or 0
+    income_lujosos = db.session.query(db.func.sum(Prestamo.precio_total)).join(Auto).filter(Prestamo.fecha_prestamo == today.date(), Auto.categoria == 'Lujoso').scalar() or 0
+    income_excentricos = db.session.query(db.func.sum(Prestamo.precio_total)).join(Auto).filter(Prestamo.fecha_prestamo == today.date(), Auto.categoria == 'Exotico').scalar() or 0
+    
     # Calcular ingresos semanales
     start_of_week = today - timedelta(days=today.weekday())
     weekly_income = []
@@ -34,14 +39,20 @@ def admin():
         income = db.session.query(db.func.sum(Prestamo.precio_total)).filter(Prestamo.fecha_prestamo == day.date()).scalar() or 0
         weekly_income.append(income)
     
-    return render_template('adminPages/ad_home.html', vehicle_count=vehicle_count, user_count=user_count, personal_count=personal_count, prestamos=prestamos, autos=autos, today=today, daily_income=daily_income, weekly_income=weekly_income)
+    return render_template('adminPages/ad_home.html', vehicle_count=vehicle_count, user_count=user_count, personal_count=personal_count, prestamos=prestamos, autos=autos, today=today, daily_income=daily_income, weekly_income=weekly_income, income_economicos=income_economicos, income_lujosos=income_lujosos, income_excentricos=income_excentricos)
 
 @admn.route('/api/daily-income', methods=['GET'])
 @admin_required
 def get_daily_income():
     date = request.args.get('date')
     daily_income = db.session.query(db.func.sum(Prestamo.precio_total)).filter(Prestamo.fecha_prestamo == date).scalar() or 0
-    return jsonify({'daily_income': daily_income})
+    
+    # Calcular ingresos por categoría
+    income_economicos = db.session.query(db.func.sum(Prestamo.precio_total)).join(Auto).filter(Prestamo.fecha_prestamo == date, Auto.categoria == 'Economico').scalar() or 0
+    income_lujosos = db.session.query(db.func.sum(Prestamo.precio_total)).join(Auto).filter(Prestamo.fecha_prestamo == date, Auto.categoria == 'Lujoso').scalar() or 0
+    income_excentricos = db.session.query(db.func.sum(Prestamo.precio_total)).join(Auto).filter(Prestamo.fecha_prestamo == date, Auto.categoria == 'Exotico').scalar() or 0
+    
+    return jsonify({'daily_income': daily_income, 'income_economicos': income_economicos, 'income_lujosos': income_lujosos, 'income_excentricos': income_excentricos})
 
 @admn.route('/admin/vehiculos')
 @admin_required

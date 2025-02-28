@@ -1,0 +1,161 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+.container {
+    text-align: center;
+    font-family: "Raleway", sans-serif;    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    h1{
+        font-weight: 800;
+        font-size: 3em;
+    }
+    p{
+        font-size: 1.3em;
+        color: #585858;
+        span{
+            color: #D268CC;
+            font-weight: 500;
+        }
+    }
+    .subTittle {
+        font-size: 1.3em;
+    }
+    .text{
+        font-size: 1.1em;
+    }
+}
+.button {
+    display: inline-block;
+    font-size: 1.2em;
+    margin-top: 60px;
+    padding: 20px 40px;
+    background-color: #D268CC;
+    max-width: fit-content;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+
+}
+
+
+.upper-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 30vh;
+}
+.lower-right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 15vh;
+}
+
+.entregaimg{
+    height: 45vh;
+}
+
+@media (max-width: 1200px) {
+    .container h1 {
+        font-size: 2.5em;
+    }
+    .container p {
+        font-size: 1.2em;
+    }
+    .container .subTittle {
+        font-size: 1.2em;
+    }
+    .container .text {
+        font-size: 1em;
+    }
+    .button {
+        font-size: 1.1em;
+        padding: 15px 30px;
+    }
+    .entregaimg {
+        height: 40vh;
+    }
+}
+
+@media (max-width: 992px) {
+    .container h1 {
+        font-size: 2em;
+    }
+    .container p {
+        font-size: 1em;
+    }
+    .container .subTittle {
+        font-size: 1em;
+    }
+    .container .text {
+        font-size: 0.9em;
+    }
+    .button {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+    .entregaimg {
+        height: 35vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .container h1 {
+        font-size: 1.8em;
+    }
+    .container p {
+        font-size: 0.9em;
+    }
+    .container .subTittle {
+        font-size: 0.9em;
+    }
+    .container .text {
+        font-size: 0.8em;
+    }
+    .button {
+        font-size: 0.9em;
+        padding: 8px 16px;
+    }
+    .entregaimg {
+        height: 30vh;
+    }
+}
+
+@media (max-width: 576px) {
+    .container h1 {
+        font-size: 1.5em;
+    }
+    .container p {
+        font-size: 0.8em;
+    }
+    .container .subTittle {
+        font-size: 0.8em;
+    }
+    .container .text {
+        font-size: 0.7em;
+    }
+    .button {
+        font-size: 0.8em;
+        padding: 6px 12px;
+    }
+    .entregaimg {
+        height: 25vh;
+    }
+}

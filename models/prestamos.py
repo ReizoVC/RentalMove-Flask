@@ -1,6 +1,7 @@
 from utils.db import db
 from flask_login import UserMixin
 from datetime import datetime
+from pytz import timezone
 
 class Prestamo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -19,5 +20,8 @@ class Prestamo(db.Model):
         self.fecha_fin = fecha_fin
         self.precio_total = precio_total
         self.status = status
-        self.fecha_prestamo = fecha_prestamo or datetime.now().date()
+        if fecha_prestamo is None:
+            lima_tz = timezone('America/Lima')
+            fecha_prestamo = datetime.now(lima_tz).date()
+        self.fecha_prestamo = fecha_prestamo
 
