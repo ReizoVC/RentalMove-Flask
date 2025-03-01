@@ -87,7 +87,7 @@ def alquilar_auto(auto_id):
     if request.method == 'POST':
         fecha_inicio = request.form['fecha_inicio']
         fecha_fin = request.form['fecha_fin']
-        dias = (datetime.strptime(fecha_fin, '%Y-%m-%d') - datetime.strptime(fecha_inicio, '%Y-%m-%d')).days
+        dias = abs((datetime.strptime(fecha_fin, '%Y-%m-%d') - datetime.strptime(fecha_inicio, '%Y-%m-%d')).days)
         precio_total = dias * auto.precio_dia
         status = 'pendiente'
         lima_tz = timezone('America/Lima')

@@ -19,7 +19,7 @@ option = {
         center: ['50%', '50%']
     },
     angleAxis: {
-        max: Math.max(total, 100),
+        max: Math.max(total),
         startAngle: 180,
         splitLine: {
             show: false

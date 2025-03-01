@@ -185,9 +185,9 @@
                     </div>
                     <div id="daygraphic" class="roundGrahic"></div>
                     <div class="propiedades">
-                        <p>Economicos<span>80%</span></p>
-                        <p>Lujosos <span>70%</span></p>
-                        <p>Exentricos <span>50%</span></p>
+                        <p>Economicos<span id="economicos-percentage">0%</span></p>
+                        <p>Lujosos <span id="lujosos-percentage">0%</span></p>
+                        <p>Excentricos <span id="excentricos-percentage">0%</span></p>
                     </div>
                     <input type="hidden" id="daily-income" value="{{ daily_income }}">
                     <input type="hidden" id="income-economicos" value="{{ income_economicos }}">
@@ -315,5 +315,21 @@
         <script src="{{ url_for('static', filename='js/admn_gestAut/graficoWeek.js') }}"></script>
         <script src="{{ url_for('static', filename='js/admn_gestAut/graficoMonth.js') }}"></script>
         <script type="module" src="https://unpkg.com/cally"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const dailyIncome = parseFloat(document.getElementById('daily-income').value) || 0;
+                const incomeEconomicos = parseFloat(document.getElementById('income-economicos').value) || 0;
+                const incomeLujosos = parseFloat(document.getElementById('income-lujosos').value) || 0;
+                const incomeExcentricos = parseFloat(document.getElementById('income-excentricos').value) || 0;
+
+                const economicosPercentage = dailyIncome > 0 ? (incomeEconomicos / dailyIncome * 100).toFixed(2) : 0;
+                const lujososPercentage = dailyIncome > 0 ? (incomeLujosos / dailyIncome * 100).toFixed(2) : 0;
+                const excentricosPercentage = dailyIncome > 0 ? (incomeExcentricos / dailyIncome * 100).toFixed(2) : 0;
+
+                document.getElementById('economicos-percentage').textContent = `${economicosPercentage}%`;
+                document.getElementById('lujosos-percentage').textContent = `${lujososPercentage}%`;
+                document.getElementById('excentricos-percentage').textContent = `${excentricosPercentage}%`;
+            });
+        </script>
     </main>
 {% endblock %}
