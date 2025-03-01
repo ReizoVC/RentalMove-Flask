@@ -1200,6 +1200,28 @@ dialog {
   }
 }
 
+@media (max-height: 800px) {
+  form input{
+    margin: 5px 0;
+    font-size: auto !important;
+    height: auto;
+  }
+  .formLogo{
+    display: none;
+  }
+  .right-section h2{
+    font-size: 1.5em;
+  }
+  .formTitle {
+    p {
+        font-size: .6em;
+    }
+  }
+  .fomrMainCont{
+    height: 98%;
+  }
+}
+
 .modal-btn_alquiler {
   color: #fff;
   background-color: #000;
